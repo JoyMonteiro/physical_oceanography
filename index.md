@@ -21,3 +21,5 @@ part of the lecture skipping other parts.
 
 * Lecture 1: [Introduction](./slides/lecture_intro/index.html)
 * Lecture 2: [History](./slides/lecture_history/index.html)
+* Lecture 3: [Thermodynamics 1](./slides/lecture_thermo/index.html)
+* Lecture 4: [Thermodynamics 2](./slides/lecture_thermo2/index.html)
