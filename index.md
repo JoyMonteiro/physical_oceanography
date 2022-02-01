@@ -23,3 +23,6 @@ part of the lecture skipping other parts.
 * Lecture 2: [History](./slides/lecture_history/index.html)
 * Lecture 3: [Thermodynamics 1](./slides/lecture_thermo/index.html)
 * Lecture 4: [Thermodynamics 2](./slides/lecture_thermo2/index.html)
+* Lecture 5: [Thermodynamics 3](./slides/lecture_thermo3/index.html)
+* Lecture 6: [Observations 1](./slides/lecture_aditi1/Observations-1.pptx)
+* Lecture 7: [Observations 2](./slides/lecture_aditi2/Observations-2.pptx)
