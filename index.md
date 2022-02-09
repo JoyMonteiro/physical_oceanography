@@ -26,3 +26,5 @@ part of the lecture skipping other parts.
 * Lecture 5: [Thermodynamics 3](./slides/lecture_thermo3/index.html)
 * Lecture 6: [Observations 1](./slides/lecture_aditi1/Observations-1.pptx)
 * Lecture 7: [Observations 2](./slides/lecture_aditi2/Observations-2.pptx)
+* Lecture 8: [Observations 2](./slides/lecture_aditi3/Observations-3.pptx)
+* Lecture 9: [Observations 2](./slides/lecture_aditi4/Observations-4.pptx)
