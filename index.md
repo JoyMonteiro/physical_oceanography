@@ -28,5 +28,5 @@ part of the lecture skipping other parts.
 * Lecture 7: [Observations 2](./slides/lecture_aditi2/Observations-2.pptx)
 * Lecture 8: [Observations 3](./slides/lecture_aditi3/Observations-3.pptx)
 * Lecture 9: [Observations 4](./slides/lecture_aditi4/Observations-4.pptx)
-* Lecture 10: [Observations 5](./slides/lecture_aditi3/Observations-5.pptx)
-* Lecture 11: [Observations 6](./slides/lecture_aditi4/Observations-6.pptx)
+* Lecture 10: [Observations 5](./slides/lecture_aditi5/Observations-5.pptx)
+* Lecture 11: [Observations 6](./slides/lecture_aditi6/Observations-6.pptx)
