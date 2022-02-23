@@ -30,3 +30,5 @@ part of the lecture skipping other parts.
 * Lecture 9: [Observations 4](./slides/lecture_aditi4/Observations-4.pptx)
 * Lecture 10: [Observations 5](./slides/lecture_aditi5/Observations-5.pptx)
 * Lecture 11: [Observations 6](./slides/lecture_aditi6/Observations-6.pptx)
+* Lecture 12: [Observations 7](./slides/lecture_aditi7/Observations-7.pptx)
+* Lecture 13: [Observations 8](./slides/lecture_aditi8/Observations-8.pptx)
