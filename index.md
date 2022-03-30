@@ -34,3 +34,5 @@ part of the lecture skipping other parts.
 * Lecture 13: [Observations 8](./slides/lecture_aditi8/Observations-8.pptx)
 * Lecture 14: [Dynamics 1](./slides/lecture_dyn1/index.html)
 * Lecture 15: [Dynamics 2](./slides/lecture_dyn2/index.html)
+* Lecture 16: [Dynamics 3](./slides/lecture_dyn3/index.html)
+* Lecture 17: [Dynamics 4](./slides/lecture_dyn4/index.html)
