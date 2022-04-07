@@ -36,3 +36,6 @@ part of the lecture skipping other parts.
 * Lecture 15: [Dynamics 2](./slides/lecture_dyn2/index.html)
 * Lecture 16: [Dynamics 3](./slides/lecture_dyn3/index.html)
 * Lecture 17: [Dynamics 4](./slides/lecture_dyn4/index.html)
+* Lecture 18: [Dynamics 5](./slides/lecture_dyn5/index.html)
+* Lecture 19: [Dynamics 6](./slides/lecture_dyn6/index.html)
+* Lecture 20: [Dynamics 7](./slides/lecture_dyn7/index.html)
