@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Guide: Seawater Properties & Measurement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sidebar-btn.active {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: #60a5fa;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 1;
+            font-weight: 800;
+            margin-right: 0.75rem;
+            color: #3b82f6;
+        }
+
+        .instrument-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background-color: #0f172a;
+        }
+
+        .image-card {
+            background-color: #0f172a;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 overflow-hidden">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-80 border-r border-slate-800 bg-slate-900/50 flex flex-col shrink-0">
+            <div class="p-8 border-b border-slate-800">
+                <div class="flex items-center gap-3 mb-2">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <h1 class="text-xl font-bold tracking-tight text-white">Physical Oceanography</h1>
+                </div>
+                <p class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Properties & Measurement</p>
+            </div>
+            
+            <nav id="sidebar-nav" class="flex-1 p-4 space-y-1 overflow-y-auto">
+                <button onclick="showSection('intro')" class="sidebar-btn active w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all">
+                    The Observational Paradox
+                </button>
+                <button onclick="showSection('temperature')" class="sidebar-btn w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:bg-slate-800">
+                    The Thermal Engine
+                </button>
+                <button onclick="showSection('salinity')" class="sidebar-btn w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:bg-slate-800">
+                    Salinity & Global Balance
+                </button>
+                <button onclick="showSection('pressure')" class="sidebar-btn w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:bg-slate-800">
+                    Hydrostatic Coordinates
+                </button>
+                <button onclick="showSection('instrumentation')" class="sidebar-btn w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:bg-slate-800">
+                    Instrumentation
+                </button>
+                <button onclick="showSection('measurement')" class="sidebar-btn w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:bg-slate-800">
+                    Evolution of Precision
+                </button>
+                <button onclick="showSection('circulation')" class="sidebar-btn w-full flex items-center p-3 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:bg-slate-800">
+                    Neutral Surfaces & Flow
+                </button>
+            </nav>
+
+            <div class="p-6 bg-slate-900 border-t border-slate-800 text-[10px] text-slate-500">
+                <p class="uppercase font-bold mb-1">Citations:</p>
+                <p class="italic">Stewart (2008), Talley (2011), Jackett & McDougall (1997)</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-950 to-slate-950">
+            <div class="max-w-5xl mx-auto p-12">
+                
+                <!-- Intro Section -->
+                <div id="intro" class="section-content active">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module I</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">The Observational Paradox</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                The central mystery of physical oceanography is that we rarely measure the things we actually want to know—such as the velocity of deep-ocean currents—directly. Instead, we must measure 'proxy' variables like temperature (T) and salinity (S). As emphasized in previous lectures, making measurements in the ocean is an extreme challenge due to the high-pressure environment, the corrosive nature of seawater, and the sheer scale of the global abyss.
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                Ocean circulation occurs primarily in the deep, opaque interior. Sunlight is absorbed exponentially; Stewart (p. 102) notes that 95% of solar energy is gone within the upper 100 meters, leaving the vast majority of the ocean in perpetual darkness. Because electromagnetic radiation cannot penetrate deep water, we cannot 'see' the currents. We are forced to infer them from the distribution of density, which is calculated from T, S, and Pressure.
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                The precision required for these measurements is staggering. Horizontal pressure gradients of only 1 decibar (dbar) over 1,000 km are sufficient to drive major currents. Our best modern pressure sensors have an inherent error of roughly 3 dbar at depth, meaning we cannot measure these gradients directly. Instead, we must rely on measuring T and S with enough precision (to the third or fourth decimal place) to calculate density differences and thus infer the pressure field (Talley, Ch 3.3).
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2 space-y-8">
+                            <div class="bg-slate-900 p-6 rounded-xl border border-blue-500/30">
+                                <h4 class="text-blue-400 font-bold text-xs uppercase mb-4 tracking-widest">Theoretical Concept</h4>
+                                <p class="text-sm text-slate-400 leading-relaxed">Precision isn't just a standard; it's a requirement to solve the geostrophic balance. A 0.001 error in T leads to massive errors in inferred circulation paths.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temperature Section -->
+                <div id="temperature" class="section-content">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module II</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">The Thermal Engine</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                Surface temperatures range from ~30°C in the tropics to the freezing point of seawater, approximately -1.7°C to -1.9°C, in polar regions (Stewart, Ch 6.4). The vertical distribution is defined by the sun's inability to penetrate deeply. Stewart (p. 102) emphasizes that 95% of sunlight is absorbed within the upper 100m. This creates a warm 'mixed layer' uniform in temperature, beneath which lies the thermocline.
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                A critical measurement challenge involves the effect of pressure on temperature. As water sinks, it is compressed adiabatically, causing its in-situ temperature to rise even if no heat is added. To track water masses, oceanographers transform these readings into Potential Temperature (θ)—the temperature a parcel would have if raised adiabatically to the surface (Stewart, Summary Pt 7).
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="bg-slate-900 p-6 rounded-xl border border-blue-500/30 sticky top-12">
+                                <h4 class="text-blue-300 mb-4 text-sm uppercase tracking-wider font-bold">Vertical Thermal Profile</h4>
+                                <svg viewBox="0 0 400 300" class="w-full h-auto">
+                                    <line x1="50" y1="50" x2="350" y2="50" stroke="#94a3b8" stroke-width="2" />
+                                    <line x1="50" y1="50" x2="50" y2="250" stroke="#94a3b8" stroke-width="2" />
+                                    <text x="200" y="30" fill="#94a3b8" text-anchor="middle" font-size="12">Temperature (°C)</text>
+                                    <text x="30" y="150" fill="#94a3b8" transform="rotate(-90 30,150)" text-anchor="middle" font-size="12">Depth (m)</text>
+                                    <path d="M 330 50 L 330 80 Q 330 120, 100 200 L 80 250" fill="none" stroke="#ef4444" stroke-width="3" />
+                                    <text x="340" y="65" fill="#ef4444" font-size="10">Mixed Layer</text>
+                                    <text x="120" y="160" fill="#ef4444" font-size="10">Thermocline</text>
+                                    <text x="90" y="240" fill="#ef4444" font-size="10">Deep Water</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salinity Section -->
+                <div id="salinity" class="section-content">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module III</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">Global Salinity Balance</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                At the simplest level, salinity is defined as the total amount of dissolved material in grams in one kilogram of sea water (Stewart, 6.1). Because it represents a mass ratio (g/kg), salinity is technically a dimensionless quantity and has no units.
+                            </p>
+                            
+                            <h3 class="text-2xl font-bold text-blue-400 mt-6">Evolution of Definitions</h3>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                Historically, salinity was determined by evaporating sea water and weighing the residue. This method proved inaccurate because some salts, such as magnesium chloride, decompose during heating, and volatile components like iodine escape. To address this, oceanographers adopted the Principle of Constant Proportions, realizing that the ratios of major ions in the open ocean are nearly constant.
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                This led to the <strong>Chlorinity</strong> definition, where salinity was calculated from the amount of chlorine, bromine, and iodine in a sample via silver nitrate titration. However, the modern standard is the <strong>Practical Salinity Scale 1978 (PSS-78)</strong>, which defines salinity in terms of the ratio of the electrical conductivity of a sample to a standard Potassium Chloride (KCl) solution.
+                            </p>
+
+                            <h3 class="text-2xl font-bold text-blue-400 mt-6">Measurement Techniques</h3>
+                            <ul class="list-disc list-outside ml-6 space-y-4 text-xl text-slate-300 font-light">
+                                <li><strong>Silver Nitrate Titration:</strong> The "Knudsen method" used historically. It relied on chemical titration on board ships to find chlorinity, with an accuracy of roughly ±0.02.</li>
+                                <li><strong>Conductivity Measurements:</strong> Modern digital standard. Because the electrical conductivity of sea water increases with both temperature and salinity, it can be measured with extreme precision (Stewart, p. 102).</li>
+                                <li><strong>Laboratory Salinometers:</strong> Used to analyze water samples captured in Niskin or Nansen bottles. These "bench" instruments, like the Autosal, reach an accuracy of ±0.002 by maintaining the sample at a highly stable temperature during measurement.</li>
+                            </ul>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="bg-slate-900 p-6 rounded-xl border border-blue-500/30 sticky top-12">
+                                <h4 class="text-blue-300 mb-4 text-sm uppercase tracking-wider font-bold">The E-P Imbalance (Stewart Ch 6)</h4>
+                                <div class="flex justify-between items-end h-40 space-x-2">
+                                    <div class="flex flex-col items-center flex-1">
+                                        <div class="w-full bg-blue-500 h-12 rounded-t opacity-40"></div>
+                                        <span class="text-[10px] mt-2 text-slate-400">P > E (Equator)</span>
+                                    </div>
+                                    <div class="flex flex-col items-center flex-1">
+                                        <div class="w-full bg-orange-500 h-32 rounded-t opacity-60"></div>
+                                        <span class="text-[10px] mt-2 text-slate-400">E > P (Subtropics)</span>
+                                    </div>
+                                    <div class="flex flex-col items-center flex-1">
+                                        <div class="w-full bg-blue-500 h-16 rounded-t opacity-40"></div>
+                                        <span class="text-[10px] mt-2 text-slate-400">P > E (Poles)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pressure Section -->
+                <div id="pressure" class="section-content">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module IV</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">Hydrostatic Balance</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                In oceanography, depth is almost always inferred from pressure. The ocean is in hydrostatic balance, where the downward force of gravity is balanced by the upward pressure gradient (Talley, Ch 3). Because seawater is only slightly compressible, there is a very close and predictable correspondence: 1 decibar (dbar) ≈ 1 meter of depth (Talley, Fig 3.2).
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                Using pressure as a vertical coordinate is a practical necessity. When lowering an instrument on a wire, currents often cause the cable to hang at an angle ('wire angle'). Consequently, the length of the wire out is a poor indicator of true depth. Pressure transducers on the instrument package provide the only reliable way to fix the vertical location accurately.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="bg-slate-900 p-6 rounded-xl border border-green-500/30 sticky top-12">
+                                <h4 class="text-green-300 mb-4 text-sm uppercase tracking-wider font-bold">Hydrostatic Correspondence</h4>
+                                <svg viewBox="0 0 400 300" class="w-full h-auto">
+                                    <line x1="50" y1="250" x2="350" y2="50" stroke="#22c55e" stroke-width="3" stroke-dasharray="5,5" />
+                                    <line x1="50" y1="250" x2="350" y2="250" stroke="#94a3b8" stroke-width="2" />
+                                    <line x1="50" y1="250" x2="50" y2="50" stroke="#94a3b8" stroke-width="2" />
+                                    <text x="200" y="280" fill="#94a3b8" text-anchor="middle" font-size="12">Depth (Meters)</text>
+                                    <text x="30" y="150" fill="#94a3b8" transform="rotate(-90 30,150)" text-anchor="middle" font-size="12">Pressure (Decibars)</text>
+                                    <circle cx="200" cy="150" r="4" fill="#22c55e" />
+                                    <text x="210" y="155" fill="#22c55e" font-size="12">1 dbar ≈ 1 m (Talley, Fig 3.2)</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instrumentation Section -->
+                <div id="instrumentation" class="section-content">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module V</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">Oceanographic Instrumentation</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                Modern oceanography relies on a combination of mechanical samplers for discrete verification and electronic sensors for high-resolution profiling.
+                            </p>
+
+                            <h3 class="text-2xl font-bold text-blue-400 mt-6">Mechanical Samplers (The Discrete Era)</h3>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                Before the 1960s, the <strong>Nansen Bottle</strong> was the primary tool. Modern plastic equivalents, known as <strong>Niskin Bottles</strong>, operate on the same principle: they are lowered open and triggered at specific depths to trap a discrete sample of seawater.
+                            </p>
+
+                            <h3 class="text-2xl font-bold text-blue-400 mt-6">The CTD Rosette System</h3>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                The workhorse of modern observational science is the <strong>CTD (Conductivity-Temperature-Depth)</strong>. The sensors are housed in a central unit surrounded by a circular array of Niskin bottles, collectively called a <strong>Rosette</strong>. This allows for simultaneous electronic data collection and physical water sampling for laboratory cross-calibration.
+                            </p>
+
+                            <h3 class="text-2xl font-bold text-blue-400 mt-6">Quartz Pressure Sensors</h3>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                To measure pressure with the required precision (resolving changes of millimeters at thousands of meters depth), oceanographers use high-stability transducers like the <strong>Digiquartz</strong>. These use the vibration frequency of a quartz crystal under stress to determine pressure with near-perfect repeatability and minimal drift (Talley, Ch 3.3).
+                            </p>
+                        </div>
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="image-card">
+                                <h4 class="text-blue-300 mb-3 text-sm uppercase tracking-wider font-bold">Niskin Sampling Bottle</h4>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Niskin_bottle.jpg" 
+                                     alt="Niskin Bottle" 
+                                     class="instrument-img"
+                                     onerror="this.src='https://placehold.co/400x300/1e293b/60a5fa?text=Image+Not+Available'">
+                                <p class="text-[10px] text-slate-500 mt-2 italic">Standard plastic Niskin bottles used for deep-water mass sampling.</p>
+                            </div>
+                            <div class="image-card">
+                                <h4 class="text-blue-300 mb-3 text-sm uppercase tracking-wider font-bold">CTD Rosette Array</h4>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/CTD_on_deck.jpg" 
+                                     alt="CTD Rosette" 
+                                     class="instrument-img"
+                                     onerror="this.src='https://placehold.co/400x300/1e293b/60a5fa?text=Image+Not+Available'">
+                                <p class="text-[10px] text-slate-500 mt-2 italic">A multi-sampler rosette system being prepared for deep-ocean deployment.</p>
+                            </div>
+                            <div class="image-card">
+                                <h4 class="text-blue-300 mb-3 text-sm uppercase tracking-wider font-bold">Pressure Sensor Transducer</h4>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Pressure_Sensor.JPG" 
+                                     alt="Quartz Pressure Sensor" 
+                                     class="instrument-img"
+                                     onerror="this.src='https://placehold.co/400x300/1e293b/60a5fa?text=Image+Not+Available'">
+                                <p class="text-[10px] text-slate-500 mt-2 italic">A high-precision electronic transducer used to resolve deep-ocean hydrostatic pressure.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Measurement Section -->
+                <div id="measurement" class="section-content">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module VI</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">Evolution of Precision</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                Oceanographic history is a transition from mechanical discrete sampling to continuous electronic profiling. Before 1960, we used Nansen bottles and reversing thermometers. These thermometers 'broke' the mercury column when flipped upside down at depth, recording temperature with an accuracy of ~±0.02°C (Stewart, p. 102).
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                Today, the Conductivity-Temperature-Depth (CTD) sensor provides continuous digital profiles. To calculate density precisely enough to infer currents, we need accuracy of ±0.001°C for T and ±0.002 for salinity. Electronic sensors drift due to biofouling or pressure strain, so we still collect 'truth samples' via Niskin bottles for calibration (Talley, Ch 3.3).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Circulation Section -->
+                <div id="circulation" class="section-content">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="h-[2px] w-8 bg-blue-500"></span>
+                        <span class="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">Lecture Module VII</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-8 text-white tracking-tight leading-none italic">Neutral Surfaces & Flow Paths</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                        <div class="lg:col-span-3 space-y-8">
+                            <p class="text-xl text-slate-300 leading-relaxed font-light dropcap">
+                                The ultimate goal of measuring T, S, and P is to define the geometry of circulation. In a stratified ocean, vertical movement is costly because it requires work against buoyancy. Most water parcels move along surfaces of constant density where buoyancy remains unchanged (Stewart, Summary Pt 8). These are the 'paths of least resistance.'
+                            </p>
+                            <p class="text-xl text-slate-300 leading-relaxed font-light">
+                                While we often use potential density surfaces, Jackett and McDougall (1997) introduced 'Neutral Density' (γⁿ) as a continuous variable. Because the thermal expansion of water varies with pressure (thermobaricity), a surface that is neutral at the surface may not be neutral at depth. Thus, γⁿ must be a function of T, S, p, AND geographic location (latitude and longitude).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Metrics -->
+                <div class="mt-24 pt-12 border-t border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 rounded-full bg-blue-500/10 text-blue-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-1">Density Surfaces</h5>
+                            <p class="text-xs text-slate-500">Circulation typically stays on neutral surfaces to minimize vertical buoyancy work.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 rounded-full bg-cyan-500/10 text-cyan-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-1">Adiabatic Ocean</h5>
+                            <p class="text-xs text-slate-500">Compression warms the deep. Potential Temp (θ) allows us to 'see' the original surface signal.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="p-3 rounded-full bg-pink-500/10 text-pink-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-white mb-1">Spatial Mapping</h5>
+                            <p class="text-xs text-slate-500">Neutral density (γⁿ) uses Lat/Lon to label global datasets continuously. [Jackett, 1997]</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Update sidebar buttons
+            document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600/10', 'text-blue-400', 'border-l-4', 'border-blue-500');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800');
+            });
+
+            const activeBtn = Array.from(document.querySelectorAll('.sidebar-btn')).find(btn => 
+                btn.getAttribute('onclick').includes(sectionId)
+            );
+            
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-blue-600/10', 'text-blue-400', 'border-l-4', 'border-blue-500');
+                activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800');
+            }
+
+            // Update content sections
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top of main
+            document.querySelector('main').scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
