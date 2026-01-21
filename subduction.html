@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Notes: Ocean Water Subduction and Surface Forcing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; color: #333; }
+        h1, h2, h3 { color: #1a202c; font-weight: 700; }
+        .section-title { border-bottom: 2px solid #3182ce; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .citation { color: #3182ce; font-weight: 600; font-size: 0.9em; }
+        .figure-ref { font-style: italic; color: #555; }
+        .highlight-box { background-color: #f7fafc; border-left: 4px solid #3182ce; padding: 1rem; margin: 1.5rem 0; }
+        .equation-box { background-color: #fff; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+
+    <div class="max-w-5xl mx-auto bg-white p-12 shadow-lg rounded-lg">
+        
+        <!-- Header -->
+        <header class="mb-10 text-center border-b pb-8">
+            <h1 class="text-4xl mb-4 text-blue-900">Ocean Water Subduction and Surface Forcing</h1>
+            <p class="text-gray-600 text-lg italic">Lecture Notes: Session January 21, 2026</p>
+        </header>
+
+        <!-- Table of Contents -->
+        <div class="bg-blue-50 p-8 rounded-lg mb-12 border border-blue-100">
+            <h3 class="text-xl font-bold mb-4 text-blue-800">Table of Contents</h3>
+            <ul class="list-none space-y-3 text-blue-700">
+                <li><a href="#intro" class="hover:text-blue-900 hover:underline flex items-center"><span class="mr-2 font-bold">1.</span> The Thermodynamic Structure of the Deep Ocean</a></li>
+                <li><a href="#mechanisms" class="hover:text-blue-900 hover:underline flex items-center"><span class="mr-2 font-bold">2.</span> The Mechanics of Subduction & Stommel's Demon</a></li>
+                <li><a href="#forcing" class="hover:text-blue-900 hover:underline flex items-center"><span class="mr-2 font-bold">3.</span> Global Distribution of Surface Forcing</a></li>
+                <li><a href="#regions" class="hover:text-blue-900 hover:underline flex items-center"><span class="mr-2 font-bold">4.</span> Mapping Subduction Regions and Processes</a></li>
+                <li><a href="#synthesis" class="hover:text-blue-900 hover:underline flex items-center"><span class="mr-2 font-bold">5.</span> Mechanistic Synthesis: From Surface to Interior</a></li>
+                <li><a href="#references" class="hover:text-blue-900 hover:underline flex items-center"><span class="mr-2 font-bold">6.</span> Bibliography</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <section id="intro" class="mb-20">
+            <h2 class="text-3xl section-title">1. The Thermodynamic Structure of the Deep Ocean</h2>
+            
+            <p class="mb-6 text-justify text-lg">
+                The fundamental objective of this lecture is to elucidate the thermodynamic structure of the deep ocean—specifically, the three-dimensional distribution of temperature, salinity, and density. This structure is not merely a static snapshot but a historical record of ocean circulation. As highlighted in the lecture, the guiding principle for understanding this distribution is the concept of <strong>adiabaticity</strong> in the ocean interior. 
+            </p>
+
+            <p class="mb-6 text-justify text-lg">
+                To a "zeroth-order approximation," the deep ocean is adiabatic. This implies that once a parcel of water exits the surface boundary layer and enters the geostrophic interior (typically below depths of 100–200 meters), its conservative properties—namely potential temperature (\(\theta\)) and salinity (\(S\))—remain effectively constant. The flow in the interior follows surfaces of constant density (isopycnals) rather than crossing them. While mixing (diabatic processes) does occur, it is a "first-order correction" to this adiabatic baseline, modifying water masses slowly over long timescales <span class="citation">(Jan 21 Transcript)</span>.
+            </p>
+
+            <div class="highlight-box">
+                <p class="text-lg"><strong>The "Memory" of the Ocean:</strong> "The properties that you observe... one kilometer down... are the properties that the water has carried from somewhere else." <span class="citation">(Jan 21 Transcript)</span></p>
+                <p class="mt-2">This means the deep ocean has "memory." It remembers the conditions of the surface where it was last in contact with the atmosphere. Consequently, the study of the deep ocean's structure is effectively the study of surface conditions and the transfer mechanisms that imprint these conditions onto the interior.</p>
+            </div>
+
+            <p class="mb-6 text-justify text-lg">
+                This framework necessitates a clear distinction between two regimes:
+            </p>
+            <ul class="list-disc list-inside ml-6 mb-6 text-lg">
+                <li><strong>The Diabatic Surface (The Source):</strong> This is the "mixed layer" where the ocean communicates with the atmosphere. Here, fluxes of heat, freshwater, and momentum are intense. The water properties are non-conservative; they are actively being modified by the sun, wind, and rain.</li>
+                <li><strong>The Adiabatic Interior (The Archive):</strong> This is the vast volume of the ocean below the mixed layer where properties are conserved. It acts as an archive, storing the properties acquired at the surface.</li>
+            </ul>
+
+            <p class="mb-6 text-justify text-lg">
+                The transfer of water from the diabatic source to the adiabatic archive is the process of <strong>subduction</strong>. It is the mechanism by which surface signatures (like high salinity from evaporation or low temperature from polar cooling) are "assigned" to specific deep water masses. If we see a salty water mass at 1000m depth, we must look for a surface region where evaporation exceeds precipitation and subduction is active to identify its origin <span class="citation">(Jan 21 Transcript)</span>.
+            </p>
+        </section>
+
+        <!-- Section 2: Mechanisms -->
+        <section id="mechanisms" class="mb-20">
+            <h2 class="text-3xl section-title">2. The Mechanics of Subduction & Stommel's Demon</h2>
+            
+            <p class="mb-6 text-justify text-lg">
+                Subduction is rigorously defined as the irreversible transfer of water from the mixed layer into the stratified thermocline. Following the kinematic definition provided in the <em>Encyclopedia of Ocean Sciences</em>, we quantify the instantaneous subduction rate \( S \) (units: m/s) by tracking the motion of a water parcel relative to the moving base of the mixed layer, denoted as \( h_m(x, y, t) \).
+            </p>
+
+            <p class="mb-6 text-justify text-lg">
+                The kinematic boundary condition at the base of the mixed layer yields the following fundamental equation for subduction:
+            </p>
+
+            <div class="equation-box text-center text-2xl">
+                $$ S = -w_H + \mathbf{u}_H \cdot \nabla h_m + \frac{\partial h_m}{\partial t} $$
+            </div>
+
+            <p class="mb-6 text-justify text-lg">
+                However, for long-term averages (annual subduction rates, \( S_{ann} \)), the time-dependence term \( \partial h_m / \partial t \) averages out over a yearly cycle, leaving two primary physical mechanisms driving the transfer:
+            </p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4 text-blue-800">A. Vertical Pumping (Ekman Pumping)</h3>
+            <p class="mb-6 text-justify text-lg">
+                The term \( -w_H \) represents the vertical velocity at the base of the mixed layer. This is largely controlled by wind-driven <strong>Ekman Pumping</strong>. 
+            </p>
+            <p class="mb-6 text-justify text-lg">
+                In the ocean interior, the vertical velocity \( w_{Ek} \) is directly proportional to the curl of the wind stress \( \tau \):
+                $$ w_{Ek} = \frac{1}{\rho f} \nabla \times \tau $$
+                where \( f \) is the Coriolis parameter and \( \rho \) is density. In regions where the wind stress curl is negative (anticyclonic) in the Northern Hemisphere, such as the subtropical gyres, \( w_{Ek} \) is negative (downward). This dynamic forcing physically pushes the mixed layer water downwards into the interior. This is a purely mechanical process driven by the convergence of surface waters <span class="citation">(Talley, p. 145; Encyclopedia, p. 1)</span>.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4 text-blue-800">B. Lateral Induction</h3>
+            <p class="mb-6 text-justify text-lg">
+                The term \( \mathbf{u}_H \cdot \nabla h_m \) represents <strong>Lateral Induction</strong>. This is a geometric transfer mechanism that becomes dominant when there are strong spatial gradients in the mixed layer depth.
+            </p>
+            <p class="mb-6 text-justify text-lg">
+                Imagine a current \( \mathbf{u}_H \) flowing southward. If the mixed layer gets shallower to the south (i.e., \( \nabla h_m \) slopes upward), the water moving horizontally will essentially "cross" the base of the mixed layer and enter the pycnocline without changing its vertical depth. 
+            </p>
+            <p class="mb-6 text-justify text-lg">
+                <strong>Why is this important?</strong> The slope of the mixed layer base \( \nabla h_m \) is often much steeper than the slope of the streamlines or isopycnals, especially in late winter near frontal zones like the Gulf Stream. In these regions, lateral induction can contribute a volume flux into the interior that is several times larger than that of Ekman pumping. For example, in the North Atlantic, lateral induction accounts for a significant portion of the formation of Mode Waters <span class="citation">(Encyclopedia, p. 2)</span>.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4 text-blue-800">C. Stommel's Demon: The Seasonal Selector</h3>
+            <p class="mb-6 text-justify text-lg">
+                A critical aspect of subduction is the seasonal cycle, often metaphorically called "Stommel's Demon." The mixed layer depth \( h_m \) varies dramatically with seasons—deep in winter (due to cooling and storms) and shallow in summer (due to solar heating).
+            </p>
+            <ul class="list-disc list-inside ml-6 mb-6 text-lg">
+                <li><strong>Summer:</strong> The mixed layer is shallow. Water below it is "trapped" in the seasonal thermocline, but it hasn't truly escaped to the deep ocean; it will likely be re-entrained next winter.</li>
+                <li><strong>Winter:</strong> The mixed layer deepens, erasing the seasonal thermocline and homogenizing the water column.</li>
+                <li><strong>Spring Transition:</strong> As spring warming begins, the mixed layer shoals (retreats upward) rapidly. </li>
+            </ul>
+            <p class="mb-6 text-justify text-lg">
+                True, permanent subduction occurs only for water that escapes the <em>maximum depth</em> of the late-winter mixed layer. Any water subducted in summer or fall is simply recaptured by the deepening winter mixed layer. Therefore, the properties of the subducted water—and thus the properties of the deep ocean—are biased towards <strong>late winter conditions</strong>. The ocean remembers only the coldest, deepest, and densest version of the surface mixed layer <span class="citation">(Encyclopedia, p. 2)</span>.
+            </p>
+        </section>
+
+        <!-- Section 3: Forcing -->
+        <section id="forcing" class="mb-20">
+            <h2 class="text-3xl section-title">3. Global Distribution of Surface Forcing</h2>
+            
+            <p class="mb-6 text-justify text-lg">
+                To predict where subduction happens and what properties the subducted water will have, we must analyze the global maps of surface forcing provided in the Talley and Stewart texts.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4 text-blue-800">Wind Stress: The Engine of Circulation</h3>
+            <p class="mb-6 text-justify text-lg">
+                The global wind field is the primary driver of the vertical velocity \( w_H \). 
+                <br><br>
+                <strong>The Pattern:</strong> The zonal average winds show Easterlies (Trade Winds) in the tropics (0°–30°) and Westerlies in the mid-latitudes (30°–60°). 
+                <br><br>
+                <strong>The Consequence (Curl):</strong> This configuration creates a massive region of anticyclonic wind stress curl in the subtropics of both hemispheres. 
+                <ul class="list-disc list-inside ml-6 mb-4 text-lg">
+                    <li>In the Northern Hemisphere, the curl is negative (clockwise stress), driving Ekman transport southward and converging water.</li>
+                    <li>In the Southern Hemisphere, the curl is positive (counter-clockwise stress), driving Ekman transport northward and also converging water.</li>
+                </ul>
+                According to the Sverdrup balance relation \( \beta V = \text{curl}(\tau) \), this curl drives the equatorward flow of the interior, but crucially for subduction, it drives <strong>Ekman Downwelling</strong> over the entire subtropical gyre region. This downwelling is the primary "piston" that pushes surface water into the main thermocline <span class="citation">(Talley, Fig 5.17; Stewart, Chapter 4)</span>.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4 text-blue-800">Heat Fluxes: Buoyancy and Density Modification</h3>
+            <p class="mb-6 text-justify text-lg">
+                While wind pushes water down, heat flux determines its temperature and density.
+                <br><br>
+                <strong>The Pattern:</strong> The ocean generally gains heat in the tropics and loses heat at high latitudes. However, the most intense signals are regional.
+                <br><br>
+                <strong>Key Insight:</strong> The regions of highest heat loss (up to >200 W/m²) are found over the western boundary currents (Gulf Stream, Kuroshio) in winter. Here, cold, dry continental air blasts over warm ocean water, causing massive latent and sensible heat loss <span class="citation">(Stewart, Forcing p. 2)</span>. This intense cooling triggers convection, deepening the mixed layer to hundreds of meters—a necessary precondition for the "Lateral Induction" mechanism described earlier.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4 text-blue-800">Freshwater Fluxes (Salinity): The E-P Balance</h3>
+            <p class="mb-6 text-justify text-lg">
+                Salinity is imprinted by the balance of Evaporation (E) and Precipitation (P).
+                <br><br>
+                <strong>The Pattern:</strong> 
+                <ul class="list-disc list-inside ml-6 mb-4 text-lg">
+                    <li><strong>Subtropics (20°–30°):</strong> Evaporation dominates (\( E > P \)). The dry descending air of the Hadley cell creates clear skies and high evaporation rates, leaving the surface water salty.</li>
+                    <li><strong>ITCZ (Equator) & High Latitudes:</strong> Precipitation dominates (\( P > E \)), diluting surface waters and making them fresher.</li>
+                </ul>
+                This distribution means that water subducting in the subtropics will be <strong>salty</strong>, while water subducting in subpolar regions (or intermediate waters) will be fresher. This salinity signature acts as a tracer, allowing us to identify the origin of deep water masses simply by their salt content <span class="citation">(Talley, Chapter 5)</span>.
+            </p>
+        </section>
+
+        <!-- Section 4: Regions -->
+        <section id="regions" class="mb-20">
+            <h2 class="text-3xl section-title">4. Mapping Subduction Regions and Processes</h2>
+            
+            <p class="mb-6 text-justify text-lg">
+                Synthesizing the mechanisms and the forcing maps, we can delineate specific global regions where subduction is most active and associate them with the dominant processes.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <!-- Region 1 -->
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Region 1: Subtropical Gyres</h3>
+                    <p class="font-semibold text-gray-700 italic mb-4">Formation of Central Waters</p>
+                    <p class="text-justify mb-4"><strong>Location:</strong> Broad basins between 15°–40° latitude (e.g., Sargasso Sea).</p>
+                    <p class="text-justify mb-4"><strong>Dominant Mechanism:</strong> <span class="text-red-700 font-bold">Ekman Pumping</span>. The broad anticyclonic wind stress curl drives slow, steady downwelling over a vast area.</p>
+                    <p class="text-justify"><strong>Resulting Water Mass:</strong> Warm and Salty. Because this region coincides with high evaporation (\( E-P > 0 \)) and solar heating, the subducted water is relatively warm and highly saline. This forms the "Central Water" found in the main thermocline.</p>
+                </div>
+
+                <!-- Region 2 -->
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Region 2: Western Boundary Extensions</h3>
+                    <p class="font-semibold text-gray-700 italic mb-4">Formation of Mode Waters</p>
+                    <p class="text-justify mb-4"><strong>Location:</strong> Just equatorward of the Gulf Stream and Kuroshio Extension; Southern Ocean (Subantarctic front).</p>
+                    <p class="text-justify mb-4"><strong>Dominant Mechanism:</strong> <span class="text-red-700 font-bold">Lateral Induction</span>. Intense winter cooling creates very deep mixed layers. As currents carry this water away from the forcing region, the mixed layer slopes up sharply, "dumping" massive volumes of water into the interior.</p>
+                    <p class="text-justify"><strong>Resulting Water Mass:</strong> Mode Waters (e.g., 18° Water). These are thick, homogeneous layers characterized by low Potential Vorticity (PV). They act as a "thermostat" for the ocean.</p>
+                </div>
+
+                <!-- Region 3 -->
+                <div class="bg-gray-100 p-6 rounded-lg md:col-span-2">
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Region 3: High Latitude Seas</h3>
+                    <p class="font-semibold text-gray-700 italic mb-4">Formation of Deep & Bottom Waters</p>
+                    <p class="text-justify mb-4"><strong>Location:</strong> Labrador Sea, Greenland-Norwegian Seas, Weddell Sea.</p>
+                    <p class="text-justify mb-4"><strong>Dominant Mechanism:</strong> <span class="text-red-700 font-bold">Deep Convection (Buoyancy Driven)</span>. Here, wind pumping is less important than the sheer density change. Extreme cooling and brine rejection (from sea ice formation) make surface water denser than the deep ocean.</p>
+                    <p class="text-justify"><strong>Resulting Water Mass:</strong> North Atlantic Deep Water (NADW) and Antarctic Bottom Water (AABW). These are the coldest, densest waters that fill the abyss, ventilating the bottom of the ocean basins.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Synthesis -->
+        <section id="synthesis" class="mb-20">
+            <h2 class="text-3xl section-title">5. Mechanistic Synthesis: From Surface to Interior</h2>
+            
+            <p class="mb-6 text-justify text-lg">
+                The thermodynamic structure of the deep ocean is not a random accumulation of water; it is a meticulously ordered stratification created by the interaction of atmospheric forcing and subduction mechanics.
+            </p>
+
+            <p class="mb-6 text-justify text-lg">
+                <strong>The Conveyor Belt of Properties:</strong>
+                <br>
+                The process begins at the surface. The atmosphere imposes a specific T-S (Temperature-Salinity) relation on the surface waters. For instance, in the subtropics, the atmosphere creates water that is warm and salty. In the subpolar regions, it creates water that is cold and fresh.
+            </p>
+
+            <p class="mb-6 text-justify text-lg">
+                <strong>The Injection Mechanism:</strong>
+                <br>
+                These surface properties are then injected into the interior. In the subtropics, the wind stress curl provides the mechanical energy (Ekman pumping) to push this warm/salty water down. In the mode water regions, the geometry of the mixed layer (Lateral Induction) facilitates the slide of homogenized water into the thermocline.
+            </p>
+
+            <p class="mb-6 text-justify text-lg">
+                <strong>The Stratification Result:</strong>
+                <br>
+                Once in the interior, these water masses arrange themselves by density. 
+                <ul class="list-disc list-inside ml-6 mb-6 text-lg">
+                    <li>The lightest waters (warmest) stay near the top.</li>
+                    <li>The denser waters (colder or saltier) slide underneath them.</li>
+                    <li>The densest waters (from polar convection) sink to the very bottom.</li>
+                </ul>
+                Because the interior is adiabatic, these layers do not mix rapidly. They stack up like a layer cake, preserving the properties they acquired at the surface.
+            </p>
+
+            <div class="highlight-box">
+                <p class="text-lg font-bold mb-2">Conclusion:</p>
+                <p class="text-lg">The deep ocean's structure is a direct map of surface conditions, filtered through the lens of subduction mechanics. The wind field determines the <em>rate</em> and <em>location</em> of the vertical transfer, while the heat and freshwater fluxes determine the <em>density</em> (and thus the final depth) of the subducted water. This is why we can look at a T-S diagram of the deep ocean and read it like a history book of surface climate.</p>
+            </div>
+        </section>
+
+        <!-- Bibliography -->
+        <section id="references" class="border-t-2 border-gray-200 pt-10">
+            <h2 class="text-2xl font-bold mb-6 text-blue-900">6. Bibliography</h2>
+            <div class="space-y-4 text-gray-700">
+                <div class="pl-4 border-l-4 border-blue-200">
+                    <p class="font-bold">Primary Sources:</p>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li class="mb-2">
+                            <strong>Talley, L. D., Pickard, G. L., Emery, W. J., & Swift, J. H.</strong> (2011). <em>Descriptive Physical Oceanography: An Introduction</em> (6th ed.). Academic Press. 
+                            <br><span class="text-sm text-gray-500">Referenced Chapters: 4 (Typical Distributions of Water Characteristics) & 5 (Mass, Salt, and Heat Budgets).</span>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Stewart, R. H.</strong> (2008). <em>Introduction to Physical Oceanography</em>. Texas A&M University.
+                            <br><span class="text-sm text-gray-500">Referenced Chapters: 4 (Atmospheric Influences) & 6 (Temperature, Salinity, and Density).</span>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Marshall, J.</strong> (2001). "Ocean Subduction". <em>Encyclopedia of Ocean Sciences</em>. Academic Press.
+                            <br><span class="text-sm text-gray-500">Referenced for: Kinematic definition of subduction, Stommel's Demon, and lateral induction.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="pl-4 border-l-4 border-green-200 mt-6">
+                    <p class="font-bold">Lecture Material:</p>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li>
+                            <strong>Monteiro, J. M.</strong> (2026). <em>Lecture Transcript: Session Jan 21</em>. (Unpublished lecture notes).
+                            <br><span class="text-sm text-gray-500">Provided the narrative framework regarding the adiabatic interior and memory of the ocean.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
