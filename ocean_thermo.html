@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ocean Thermodynamics: Lecture Plan & Notes</title>
+
+        <!-- MathJax Configuration -->
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [
+                        ["$", "$"],
+                        ["\\(", "\\)"],
+                    ],
+                },
+            };
+        </script>
+
+        <!-- MathJax for LaTeX rendering -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script
+            id="MathJax-script"
+            async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        ></script>
+
+        <style>
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    Helvetica, Arial, sans-serif, "Apple Color Emoji",
+                    "Segoe UI Emoji", "Segoe UI Symbol";
+                line-height: 1.6;
+                color: #333;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem;
+                background-color: #f9f9f9;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #1a202c;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+                font-weight: 700;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                border-bottom: 2px solid #e2e8f0;
+                padding-bottom: 0.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 0.25rem;
+            }
+            h3 {
+                font-size: 1.4rem;
+                color: #2d3748;
+            }
+            h4 {
+                font-size: 1.1rem;
+                color: #4a5568;
+                margin-top: 1.5rem;
+            }
+
+            .metadata {
+                background-color: #edf2f7;
+                padding: 1.5rem;
+                border-radius: 8px;
+                margin-bottom: 2rem;
+                border-left: 4px solid #4a5568;
+            }
+
+            .metadata p {
+                margin: 0.25rem 0;
+                font-weight: 500;
+            }
+
+            ul {
+                padding-left: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            li {
+                margin-bottom: 0.5rem;
+            }
+
+            .equation-block {
+                background-color: #fff;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                margin: 1.5rem 0;
+                overflow-x: auto;
+            }
+
+            .placeholder-image {
+                background-color: #e2e8f0;
+                border: 2px dashed #cbd5e0;
+                color: #4a5568;
+                padding: 2rem;
+                text-align: center;
+                border-radius: 8px;
+                margin: 1.5rem 0;
+                font-style: italic;
+            }
+
+            strong {
+                color: #2d3748;
+            }
+
+            em {
+                color: #4a5568;
+            }
+
+            .class-discussion {
+                background-color: #fffaf0;
+                border-left: 4px solid #ed8936;
+                padding: 1rem;
+                margin: 1rem 0;
+                font-size: 0.95rem;
+            }
+
+            .class-discussion strong {
+                color: #c05621;
+            }
+
+            /* Print styles */
+            @media print {
+                body {
+                    background-color: #fff;
+                    max-width: 100%;
+                    padding: 0;
+                }
+                .metadata {
+                    border: 1px solid #ccc;
+                }
+                .class-discussion {
+                    border: 1px solid #ed8936;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Course Module: Ocean Thermodynamics</h1>
+            <div class="metadata">
+                <p><strong>Course:</strong> Physical Oceanography</p>
+                <p>
+                    <strong>Primary Text:</strong> Vallis,
+                    <em>Atmospheric and Ocean Fluid Dynamics</em> (Chapters 1 &
+                    2)
+                </p>
+                <p>
+                    <strong>Prerequisites:</strong> Lectures on Equations of
+                    Motion (Jan 16) & Water Mass Transformation (Jan 29)
+                </p>
+            </div>
+        </header>
+
+        <section id="part1">
+            <h2>Part 1: Lecture Plan Overview</h2>
+
+            <p>
+                <strong>Objective:</strong><br />
+                To bridge the gap between the mechanical equations of motion
+                (Navier-Stokes) and the observed reality of the ocean by
+                introducing the Equation of State (EOS). We will move from
+                abstract thermodynamic laws to the practical Gibbs function used
+                in modern ocean modelling (TEOS-10).
+            </p>
+
+            <ol>
+                <li>
+                    <strong>The Closure Problem:</strong> Demonstrate that the
+                    mechanical equations (momentum + continuity) have more
+                    unknowns than equations (5 vs 4). Introduce the need for
+                    $\rho = \rho(S, T, p)$.
+                </li>
+                <li>
+                    <strong>The Thermodynamic Energy Equation:</strong> Derive
+                    the prognostic equation for temperature ($DT/Dt$) from the
+                    First Law of Thermodynamics to formally "close" the system.
+                </li>
+                <li>
+                    <strong>Thermodynamic Potentials:</strong> Introduce the
+                    Fundamental Relation of internal energy ($I$). Explain the
+                    "natural coordinates" problem ($\eta, \alpha$).
+                </li>
+                <li>
+                    <strong>Legendre Transformations:</strong> Systematically
+                    derive Enthalpy ($h$), Helmholtz ($f$), and Gibbs ($g$)
+                    energies to find a potential that uses observable variables
+                    ($T, S, p$).
+                </li>
+                <li>
+                    <strong>Maxwell's Relations:</strong> Explain the
+                    mathematical principle of exact differentials to relate
+                    unmeasurable quantities (entropy) to measurable ones
+                    (volume/pressure).
+                </li>
+                <li>
+                    <strong>The Gibbs Function ($g$):</strong> Establish $g$ as
+                    the fundamental tool for oceanography.
+                </li>
+                <li>
+                    <strong>Derivations:</strong> Show how to derive density,
+                    thermal expansion, compressibility, $c_p$, and $c_v$ purely
+                    from the Gibbs function.
+                </li>
+                <li>
+                    <strong>Physical Interpretations:</strong> Discuss the
+                    difference between $c_p$ and $c_v$ in the context of ocean
+                    mixing and compressibility.
+                </li>
+            </ol>
+        </section>
+
+        <hr />
+
+        <section id="part2">
+            <h2>Part 2: Comprehensive Lecture Notes</h2>
+
+            <article id="introduction">
+                <h3>I. Introduction: The Unclosed System</h3>
+                <p>
+                    In our previous discussion (Jan 16), we established the
+                    Boussinesq equations of motion. However, this system is
+                    mathematically "open."
+                </p>
+
+                <div class="class-discussion">
+                    <p>
+                        <strong>Class Discussion:</strong> In standard continuum
+                        mechanics or ideal gas dynamics, we are primarily
+                        interested in conservation of momentum and mass. Often,
+                        systems in those fields can be closed with the simplest
+                        possible relationship: $\rho = \text{constant}$. This
+                        trivial closure allows one to solve the system without
+                        invoking detailed thermodynamics. However, for the
+                        ocean, this simplification fails because density
+                        variations drive circulation. We typically refer to this
+                        relationship between density and other properties as the
+                        <strong>Equation of State</strong>. To make any progress
+                        in oceanography, unlike in simple fluid mechanics, we
+                        absolutely need to understand the thermodynamic nature
+                        of the fluid.
+                    </p>
+                </div>
+
+                <ul>
+                    <li>
+                        <strong>The Counting Problem:</strong>
+                        <ul>
+                            <li>
+                                <strong>Unknowns (5):</strong> Velocities ($u,
+                                v, w$), Pressure ($p$), Density ($\rho$).
+                            </li>
+                            <li>
+                                <strong>Equations (4):</strong> Three momentum
+                                equations + One continuity equation ($\nabla
+                                \cdot \mathbf{u} = 0$).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>The Solution:</strong> We need an
+                        <strong>Equation of State (EOS)</strong>: $\rho =
+                        \rho(S, T, p)$.
+                        <ul>
+                            <li>
+                                <em>Note:</em> In a barotropic fluid, $\rho =
+                                \rho(p)$, and we are done. In the baroclinic
+                                ocean, density depends on Temperature ($T$) and
+                                Salinity ($S$).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>The Consequence:</strong> Introducing $T$ and
+                        $S$ adds two new unknowns. We must therefore derive
+                        evolution equations for them using thermodynamics.
+                    </li>
+                </ul>
+            </article>
+
+            <article id="energy-equation">
+                <h3>II. Derivation of the Thermodynamic Energy Equation</h3>
+                <p>
+                    <em
+                        >Goal: Derive the evolution equation for
+                        temperature.</em
+                    >
+                </p>
+
+                <h4>Step 1: The First Law of Thermodynamics</h4>
+                <p>
+                    For a fluid parcel, the change in Internal Energy ($I$)
+                    equals heat added ($\dot{Q}$) minus work done by expansion
+                    ($p D\alpha/Dt$):
+                </p>
+                <div class="equation-block">
+                    $$\frac{DI}{Dt} = \dot{Q} - p \frac{D\alpha}{Dt}$$
+                </div>
+
+                <h4>Step 2: The Fundamental Relation</h4>
+                <p>Combining the First and Second Laws:</p>
+                <div class="equation-block">
+                    $$dI = T d\eta - p d\alpha + \mu dS$$
+                </div>
+                <p>Taking the material derivative:</p>
+                <div class="equation-block">
+                    $$\frac{DI}{Dt} = T \frac{D\eta}{Dt} - p \frac{D\alpha}{Dt}
+                    + \mu \frac{DS}{Dt}$$
+                </div>
+
+                <h4>Step 3: The Entropy Equation</h4>
+                <p>Equating Step 1 and Step 2:</p>
+                <div class="equation-block">
+                    $$\dot{Q} - p \frac{D\alpha}{Dt} = T \frac{D\eta}{Dt} - p
+                    \frac{D\alpha}{Dt} + \mu \frac{DS}{Dt}$$ $$T
+                    \frac{D\eta}{Dt} = \dot{Q} - \mu \frac{DS}{Dt}$$
+                </div>
+
+                <h4>Step 4: Transforming Entropy to Temperature</h4>
+                <p>
+                    We measure $T$, not $\eta$. First, we expand
+                    $\frac{D\eta}{Dt}$ using the chain rule, assuming entropy is
+                    a function of Temperature ($T$), Pressure ($p$), and
+                    Salinity ($S$):
+                </p>
+                <div class="equation-block">
+                    $$\frac{D\eta}{Dt} = \left( \frac{\partial \eta}{\partial T}
+                    \right)_{p,S} \frac{DT}{Dt} + \left( \frac{\partial
+                    \eta}{\partial p} \right)_{T,S} \frac{Dp}{Dt} + \left(
+                    \frac{\partial \eta}{\partial S} \right)_{T,p}
+                    \frac{DS}{Dt}$$
+                </div>
+
+                <p>
+                    We then substitute standard thermodynamic definitions
+                    (derived in later sections):
+                </p>
+                <ul>
+                    <li>
+                        <strong>Specific Heat Capacity:</strong> $\left(
+                        \frac{\partial \eta}{\partial T} \right)_{p,S} =
+                        \frac{c_p}{T}$
+                    </li>
+                    <li>
+                        <strong>Maxwell Relation:</strong> $\left(
+                        \frac{\partial \eta}{\partial p} \right)_{T,S} = -\alpha
+                        \beta$
+                    </li>
+                    <li>
+                        <em
+                            >(Note: Salinity effects are often handled
+                            separately or neglected in simplified thermal
+                            derivations).</em
+                        >
+                    </li>
+                </ul>
+
+                <p>
+                    Substituting these back yields the final temperature
+                    equation:
+                </p>
+                <div class="equation-block">
+                    $$c_p \frac{DT}{Dt} = \dot{Q} + T \alpha \beta
+                    \frac{Dp}{Dt}$$
+                </div>
+                <ul>
+                    <li>
+                        <strong>$\dot{Q}$</strong>: Diabatic heating
+                        (Solar/Mixing).
+                    </li>
+                    <li>
+                        <strong>$T \alpha \beta Dp/Dt$</strong>: Adiabatic
+                        compression heating (why deep water warms up under
+                        pressure).
+                    </li>
+                </ul>
+            </article>
+
+            <article id="potentials">
+                <h3>
+                    III. Thermodynamic Potentials & Legendre Transformations
+                </h3>
+
+                <div class="placeholder-image"></div>
+
+                <p>
+                    To calculate coefficients like $\beta$ and $c_p$, we need a
+                    thermodynamic potential.
+                </p>
+
+                <h4>1. The Fundamental Relation ($I$):</h4>
+                <div class="equation-block">
+                    $$dI = T d\eta - p d\alpha + \mu dS$$
+                </div>
+                <p>
+                    <em>Problem:</em> Natural variables are $\eta$
+                    (unmeasurable) and $\alpha$ (not a control variable).
+                </p>
+
+                <h4>2. Enthalpy ($h$): Swapping $\alpha \rightarrow p$</h4>
+                <div class="equation-block">
+                    $$h = I + p\alpha \quad \Rightarrow \quad dh = T d\eta +
+                    \alpha dp + \mu dS$$
+                </div>
+                <p>
+                    <em>Use:</em> Heat budgets ($dh = dQ$ at constant pressure).
+                </p>
+
+                <h4>
+                    3. Gibbs Free Energy ($g$): Swapping $\eta \rightarrow T$
+                    and $\alpha \rightarrow p$
+                </h4>
+                <div class="equation-block">
+                    $$g = h - T\eta \quad \Rightarrow \quad dg = -\eta dT +
+                    \alpha dp + \mu dS$$
+                </div>
+                <p>
+                    <em>Use:</em>
+                    <strong>The Standard for Oceanography.</strong> Its
+                    variables ($T, p, S$) are exactly what we measure.
+                </p>
+            </article>
+
+            <article id="maxwell">
+                <h3>IV. Maxwell's Relations</h3>
+                <p>
+                    Before we can use the Gibbs function to calculate practical
+                    oceanographic variables, we need a mathematical tool to
+                    handle terms involving entropy.
+                </p>
+
+                <h4>1. The Mathematical Principle</h4>
+                <p>
+                    Because $g(T, p, S)$ is a state function, its differential
+                    $dg$ is "exact." This implies that the mixed partial
+                    derivatives must be equal. The order of differentiation does
+                    not matter:
+                </p>
+                <div class="equation-block">
+                    $$\frac{\partial}{\partial p} \left( \frac{\partial
+                    g}{\partial T} \right) = \frac{\partial}{\partial T} \left(
+                    \frac{\partial g}{\partial p} \right)$$
+                </div>
+
+                <h4>2. Deriving the Relation</h4>
+                <p>
+                    From the Gibbs differential $dg = -\eta dT + \alpha dp + \mu
+                    dS$:
+                </p>
+                <ul>
+                    <li>The derivative with respect to $T$ is $-\eta$.</li>
+                    <li>The derivative with respect to $p$ is $\alpha$.</li>
+                </ul>
+                <p>Substitute these into the equality above:</p>
+                <div class="equation-block">
+                    $$\frac{\partial}{\partial p} (-\eta)_T =
+                    \frac{\partial}{\partial T} (\alpha)_p$$
+                </div>
+
+                <h4>3. The Result (Maxwell's Relation for Gibbs)</h4>
+                <div class="equation-block">
+                    $$-\left( \frac{\partial \eta}{\partial p} \right)_T =
+                    \left( \frac{\partial \alpha}{\partial T} \right)_p$$
+                </div>
+
+                <h4>4. Physical Significance</h4>
+                <ul>
+                    <li>
+                        <strong>Left Hand Side:</strong> How entropy changes
+                        with pressure. This is effectively impossible to measure
+                        directly in the ocean.
+                    </li>
+                    <li>
+                        <strong>Right Hand Side:</strong> How specific volume
+                        changes with temperature. This is simply
+                        <strong>thermal expansion</strong>, which is easily
+                        measured in a lab.
+                    </li>
+                    <li>
+                        <strong>Conclusion:</strong> Maxwell's relations allow
+                        us to replace unmeasurable entropy terms with measurable
+                        volume/density terms. This is the key step that makes
+                        the derivation of $c_v$ possible in the next section.
+                    </li>
+                </ul>
+            </article>
+
+            <article id="utility">
+                <h3>V. Utility: Deriving Quantities from the Gibbs Function</h3>
+                <p>
+                    In modern oceanography (TEOS-10), we fit a single function
+                    $g(T,p,S)$ to data. All other properties are derived
+                    mathematically from this surface using the principles above.
+                </p>
+
+                <div class="placeholder-image"></div>
+
+                <h4>1. Density ($\rho$)</h4>
+                <p>
+                    From $dg = -\eta dT + \alpha dp$, the partial derivative
+                    with respect to pressure is volume:
+                </p>
+                <div class="equation-block">
+                    $$\alpha = \left( \frac{\partial g}{\partial p}
+                    \right)_{T,S} \implies \rho = \frac{1}{g_p}$$
+                </div>
+
+                <h4>
+                    2. Thermal Expansion ($\beta$) and Compressibility
+                    ($\kappa_T$)
+                </h4>
+                <p>
+                    These coefficients describe how the ocean's volume changes.
+                    They are essential for stability analysis and sound speed
+                    calculations.
+                </p>
+
+                <p>
+                    <strong>Thermal Expansion Coefficient ($\beta$):</strong
+                    ><br />
+                    Defined as the fractional change in volume with temperature
+                    at constant pressure.
+                </p>
+                <div class="equation-block">
+                    $$\beta \equiv \frac{1}{\alpha} \left( \frac{\partial
+                    \alpha}{\partial T} \right)_p = \frac{g_{pT}}{g_p}$$
+                </div>
+
+                <p>
+                    <strong>Isothermal Compressibility ($\kappa_T$):</strong
+                    ><br />
+                    Defined as the fractional change in volume with pressure at
+                    constant temperature.
+                </p>
+                <div class="equation-block">
+                    $$\kappa_T \equiv -\frac{1}{\alpha} \left( \frac{\partial
+                    \alpha}{\partial p} \right)_T = -\frac{g_{pp}}{g_p}$$
+                </div>
+
+                <h4>3. Specific Heat at Constant Pressure ($c_p$)</h4>
+
+                <div class="class-discussion">
+                    <p>
+                        <strong>Class Discussion:</strong> In class, we
+                        emphasized that $c_p$ is directly related to
+                        <strong>Ocean Heat Content</strong>, which is an
+                        important quantity in itself. To derive this, think
+                        about "Heat Provided." Since $dQ = T d\eta$, at constant
+                        pressure we can write $c_p dT = T d\eta$. This allows us
+                        to calculate $c_p$ if we know how to compute entropy
+                        $\eta$ from the Gibbs function. Through symbol
+                        manipulation of these thermodynamic identities, you
+                        should be able to get to <em>any</em> single
+                        thermodynamic quantity.
+                    </p>
+                </div>
+
+                <div class="equation-block">
+                    $$c_p \equiv T \left( \frac{\partial \eta}{\partial T}
+                    \right)_p$$
+                </div>
+                <p>Since $\eta = -g_T$, substituting gives:</p>
+                <div class="equation-block">$$c_p = -T g_{TT}$$</div>
+
+                <h4>4. Specific Heat at Constant Volume ($c_v$)</h4>
+                <p>
+                    We cannot measure $c_v$ in the ocean because specific volume
+                    ($\alpha$) changes with depth. Therefore, we must derive
+                    $c_v$ entirely in terms of the measurable Gibbs function
+                    $g(T, p)$.
+                </p>
+
+                <p><strong>Step A: The Definition</strong></p>
+                <div class="equation-block">
+                    $$c_v \equiv T \left( \frac{\partial \eta}{\partial T}
+                    \right)_\alpha$$
+                </div>
+                <p>
+                    <em
+                        >Note the subscript $\alpha$: Volume is held
+                        constant.</em
+                    >
+                </p>
+
+                <p>
+                    <strong
+                        >Step B: Changing Variables (from $\alpha$ to
+                        $p$)</strong
+                    ><br />
+                    Using partial calculus rules:
+                </p>
+                <div class="equation-block">
+                    $$c_v = T \left( \frac{\partial \eta}{\partial T} \right)_p
+                    + T \left( \frac{\partial \eta}{\partial p} \right)_T \left(
+                    \frac{\partial p}{\partial T} \right)_\alpha$$
+                </div>
+
+                <p><strong>Step C: Substitution</strong></p>
+                <ul>
+                    <li>First term is $c_p$.</li>
+                    <li>
+                        Second term uses
+                        <strong>Maxwell's Relation</strong> (from Section IV):
+                        $\left(\frac{\partial \eta}{\partial p}\right)_T =
+                        -\left(\frac{\partial \alpha}{\partial T}\right)_p$.
+                    </li>
+                    <li>
+                        Third term (Triple Product Rule): $\left( \frac{\partial
+                        p}{\partial T} \right)_\alpha = - \frac{(\partial \alpha
+                        / \partial T)_p}{(\partial \alpha / \partial p)_T}$.
+                    </li>
+                </ul>
+
+                <p>Substituting:</p>
+                <div class="equation-block">
+                    $$c_v = c_p + T \left[ - \left( \frac{\partial
+                    \alpha}{\partial T} \right)_p \right] \left[ -
+                    \frac{(\partial \alpha / \partial T)_p}{(\partial \alpha /
+                    \partial p)_T} \right]$$
+                </div>
+
+                <p>
+                    <strong>Step D: Final Result with Gibbs Derivatives</strong
+                    ><br />
+                    Now replace terms with the definitions derived in
+                    Subsections 1 & 2:
+                </p>
+                <ul>
+                    <li>$c_p = -T g_{TT}$</li>
+                    <li>
+                        $(\partial \alpha / \partial T)_p = \alpha \beta =
+                        g_{pT}$
+                    </li>
+                    <li>
+                        $(\partial \alpha / \partial p)_T = -\alpha \kappa_T =
+                        g_{pp}$
+                    </li>
+                </ul>
+
+                <div class="equation-block">
+                    $$c_v = (-T g_{TT}) + T \frac{(g_{pT})^2}{g_{pp}}$$
+                </div>
+
+                <p><strong>Final Result:</strong></p>
+                <div class="equation-block">
+                    $$c_v = -T \left( g_{TT} - \frac{(g_{pT})^2}{g_{pp}}
+                    \right)$$
+                </div>
+            </article>
+
+            <article id="physical-interpretation">
+                <h3>VI. Physical Interpretation: $c_p$ vs. $c_v$</h3>
+
+                <p>
+                    The difference between these two specific heats is given by
+                    the relation:
+                </p>
+                <div class="equation-block">
+                    $$c_p - c_v = \frac{T \alpha \beta^2}{\kappa_T}$$
+                </div>
+
+                <h4>1. The Mechanism: Work of Expansion</h4>
+                <p>Why is $c_p$ always larger than $c_v$?</p>
+                <ul>
+                    <li>
+                        <strong>Case $c_v$ (Fixed Volume):</strong> When you
+                        heat a fixed-volume parcel, it cannot move.
+                        <strong>100%</strong> of the input energy goes directly
+                        into increasing molecular kinetic energy (raising
+                        temperature).
+                    </li>
+                    <li>
+                        <strong>Case $c_p$ (Fixed Pressure):</strong> When you
+                        heat a parcel at constant pressure, it naturally wants
+                        to expand (governed by $\beta$). To expand, it must push
+                        back its boundaries against the surrounding fluid. This
+                        "pushing" requires mechanical work.
+                    </li>
+                    <li>
+                        <strong>Conclusion:</strong> $c_p > c_v$ because you
+                        must supply <strong>extra heat</strong> to pay for this
+                        mechanical work, in addition to the energy needed to
+                        raise the temperature.
+                    </li>
+                </ul>
+
+                <h4>2. Comparison: Ideal Gas vs. The Ocean</h4>
+                <ul>
+                    <li>
+                        <strong>Ideal Gas ($R$):</strong> For a gas, the
+                        intermolecular forces are negligible. The work done is
+                        purely against external pressure ($P \Delta V$). This
+                        leads to the famous relation $c_p - c_v = R$.
+                    </li>
+                    <li>
+                        <strong>The Ocean (Complex Work):</strong> In water,
+                        molecules are packed tightly. The parcel must do work
+                        against external pressure <strong>AND</strong> against
+                        the strong internal attractive forces between water
+                        molecules.
+                        <ul>
+                            <li>
+                                This is why the RHS is not a constant like $R$.
+                                It depends on $\kappa_T$ (how stiff the fluid
+                                is) and $\beta$ (how much it tries to expand).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>3. The "Cold Water Limit" (Oceanographic Special Case)</h4>
+                <p>
+                    A unique feature of the ocean is that $\beta$ (thermal
+                    expansion) varies strongly and can even be zero.
+                </p>
+                <ul>
+                    <li>
+                        <strong
+                            >At $4^\circ$C (Freshwater) or Freezing
+                            (Seawater):</strong
+                        >
+                        The thermal expansion coefficient $\beta$ approaches
+                        zero.
+                    </li>
+                    <li>
+                        <strong>Consequence:</strong> If $\beta \approx 0$, then
+                        the RHS $\frac{T \alpha \beta^2}{\kappa_T} \approx 0$.
+                    </li>
+                    <li><strong>Result:</strong> $c_p \approx c_v$.</li>
+                    <li>
+                        <strong>Physical Meaning:</strong> At these
+                        temperatures, adding heat causes
+                        <strong>no expansion</strong>. Since there is no
+                        expansion, no mechanical work is done against the
+                        surroundings. Therefore, the heat required to raise the
+                        temperature at constant pressure is exactly the same as
+                        at constant volume.
+                    </li>
+                </ul>
+            </article>
+        </section>
+    </body>
+</html>
