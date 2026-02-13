@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundations of Fluid Motion: Scaling & Non-Dimensionalization</title>
+    
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Configuration for $ delimiters -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+    </script>
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Highlight.js for Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif', serif;
+        }
+
+        .math-block {
+            overflow-x: auto;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            border-left: 4px solid #3b82f6;
+            background-color: #eff6ff;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .code-box {
+            background-color: #f1f5f9;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .lecture-note {
+            font-family: 'Noto Serif', serif;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation / Header -->
+    <header class="bg-slate-900 text-white py-12 px-6 shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-blue-400 font-bold tracking-widest uppercase text-sm mb-2">Physical Oceanography Class Notes</div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Non-Dimensionalization, Scaling, and Similarity</h1>
+            <p class="text-xl text-slate-300 font-light">From Ocean Mixing to the Navier-Stokes Equations</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+
+        <!-- SECTION 1: MOTIVATION -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">1. Motivation: The Physics of Mixing</h2>
+            <div class="lecture-note text-slate-700">
+                <p class="mb-4">
+                    Why do we obsess over algebra and dimensionless numbers? To answer this, let us look at the ocean. Consider the transport of energy. In the tropics, we have significant heating—water vapor and heat accumulation. Observations show that this heat slowly moves poleward. If we model this as energy transport, we can define a <strong>diffusivity</strong> for the atmosphere or the ocean.
+                </p>
+                <p class="mb-4">
+                    Imagine a vortex or an eddy bringing hot fluid from one side and cold fluid from the other. The fundamental question is: <strong>Over what length scale does that mixing happen?</strong> 
+                </p>
+                <p class="mb-4">
+                    If you have very small eddies versus a large eddy, the physics changes. A large eddy mixes temperature over a large length scale. This concept is the "mixing length scale" or "mixing time scale." It tells us something fundamental about the system's disturbances—what phenomena can actually exist? Even though non-dimensionalization looks like "just a bunch of algebra," it leads to physical insights into the fundamental nature of the flow, allowing us to compare a cup of coffee to an ocean current.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BUCKINGHAM PI -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">2. The Buckingham Pi Theorem</h2>
+            <div class="lecture-note text-slate-700">
+                <p class="mb-4">
+                    Before deriving equations, we often use the Buckingham Pi theorem to determine relevant parameters without knowing the exact governing equation. The theorem states:
+                </p>
+                <div class="highlight-box">
+                    <strong>The Theorem:</strong> If a problem is described by \( k \) physical variables involving \( p \) fundamental dimensions (Mass \( M \), Length \( L \), Time \( T \), Temperature \( \Theta \)), we can reduce the problem to a set of \( n = k - p \) dimensionless parameters, denoted as \( \Pi_1, \Pi_2, \dots, \Pi_n \).
+                </div>
+                <p class="mb-4">
+                    <strong>Physical Significance:</strong> This reduction is not merely mathematical convenience. It is the basis of <em>Similitude</em>. It allows us to design scale models (wind tunnels, water tanks) where the physics matches the full-scale prototype, provided the \( \Pi \) groups (like Reynolds number) match.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE PENDULUM -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">3. Scaling vs. Non-Dimensionalization: The Simple Pendulum</h2>
+            
+            <div class="lecture-note text-slate-700 mb-8">
+                <p class="mb-4">
+                    We will now perform the rigorous derivation step-by-step. The goal is to transform our dimensional equation into a fundamental form by explicitly defining reference scales.
+                </p>
+                <p>Consider the governing equation for a simple pendulum of length \( L \) and mass \( m \), where \( \phi \) is the angle:</p>
+                
+                <div class="math-block text-center">
+                    $$ \frac{d^2\phi}{dt^2} + \frac{g}{L}\sin(\phi) = 0 $$
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Computational Example: Why Mass Doesn't Matter</h3>
+                    <p class="mb-4 text-sm text-slate-600">
+                        We can use Linear Algebra and Python to automatically find the "Null Space" of the dimensional matrix. This purely algebraic approach confirms that mass ($m$) must vanish from the time-scale relationship.
+                    </p>
+                    <p class="mb-4 text-sm text-slate-600">
+                        Below is the SymPy code that sets up the dimensional matrix for variables $[m, L, g, T]$. Notice how the null space vector for mass is strictly zero.
+                    </p>
+                    <pre><code class="language-python rounded">import sympy
+from sympy import Matrix
+
+# 1. Define the Dimensional Matrix
+# Rows: Fundamental Dimensions [Mass, Length, Time]
+# Columns: Physical Variables  [m,    L,     g,    T_period]
+
+# m (mass)   = M^1 L^0 T^0
+# L (length) = M^0 L^1 T^0
+# g (gravity)= M^0 L^1 T^-2
+# T (period) = M^0 L^0 T^1
+
+dimensional_matrix = Matrix([
+    [1, 0, 0, 0],   # Mass row
+    [0, 1, 1, 0],   # Length row
+    [0, 0, -2, 1]   # Time row
+])
+
+# 2. Compute the Null Space (Kernel)
+# The null space vectors represent the exponents of the Pi groups.
+null_space = dimensional_matrix.nullspace()
+
+print("Null Space Basis Vectors:")
+for vec in null_space:
+    print(vec)
+
+# Output Calculation:
+# The solver finds a vector v = [e_m, e_L, e_g, e_T] such that Matrix * v = 0.
+# Row 1 (Mass) implies: 1 * e_m = 0  ---> e_m MUST be 0.
+# This proves mathematically that the period T cannot depend on mass m.
+</code></pre>
+                </div>
+
+                <h3 class="text-xl font-bold mt-6 mb-2">Step 1: Systematic Selection of Scales</h3>
+                <p class="mb-4">
+                    We begin by decomposing our variables into a <strong>Reference Scale</strong> (with units) and a <strong>Non-dimensional Variable</strong> (magnitude ~ 1).
+                </p>
+                <p class="mb-2"><strong>Time Scaling:</strong> Let \( T_R \) be our reference time scale.</p>
+                <div class="math-block text-center">
+                    $$ t = T_R \cdot t^* $$
+                </div>
+                <p class="mb-2"><strong>Angle Scaling:</strong> Let \( \Phi_R \) be our reference angle scale.</p>
+                <div class="math-block text-center">
+                    $$ \phi = \Phi_R \cdot \phi^* $$
+                </div>
+                <p class="mb-4">
+                    Here, \( t^* \) and \( \phi^* \) are unitless. The derivative terms scale as:
+                    $$ \frac{d}{dt} = \frac{1}{T_R}\frac{d}{dt^*} \quad \implies \quad \frac{d^2}{dt^2} = \frac{1}{T_R^2}\frac{d^2}{dt^{*2}} $$
+                </p>
+
+                <h3 class="text-xl font-bold mt-6 mb-2">Step 2: Substitution and Balancing</h3>
+                <p class="mb-4">Substituting these into the governing equation:</p>
+                <div class="math-block text-center">
+                    $$ \frac{\Phi_R}{T_R^2} \frac{d^2\phi^*}{dt^{*2}} + \frac{g}{L}\sin(\Phi_R \phi^*) = 0 $$
+                </div>
+                <p class="mb-4">To identify the natural frequency, we balance the inertial term (acceleration) with the gravitational term. Dividing the entire equation by the coefficient \( \Phi_R/T_R^2 \):</p>
+                <div class="math-block text-center">
+                    $$ \frac{d^2\phi^*}{dt^{*2}} + \left[ \frac{g T_R^2}{L} \right] \frac{\sin(\Phi_R \phi^*)}{\Phi_R} = 0 $$
+                </div>
+                <p class="mb-4">
+                    For the physics to be invariant, the bracketed term must be of order unity (specifically 1). This defines our reference time scale \( T_R \):
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{g T_R^2}{L} = 1 \implies T_R = \sqrt{\frac{L}{g}} $$
+                </div>
+
+                <h3 class="text-xl font-bold mt-6 mb-2">Step 3: Choosing the Reference Angle \(\Phi_R\)</h3>
+                <p class="mb-4">
+                    The choice of \( \Phi_R \) depends entirely on the initial conditions of the system. This highlights a key subtlety in scaling: the "correct" scale depends on the regime of the physics.
+                </p>
+                
+                <div class="highlight-box">
+                    <h4 class="font-bold text-lg mb-2">Case A: Release from Rest (Small/Moderate Amplitude)</h4>
+                    <p class="mb-2">If the pendulum is released from an initial angle \( \phi_0 \) with zero velocity, the natural scale for the motion is that initial angle itself.</p>
+                    <p class="mb-2">$$ \Phi_R = \phi_0 $$</p>
+                    <p>The dimensionless initial condition becomes \( \phi^*(0) = 1 \). If \( \phi_0 \) is small, the sine term linearizes (\( \sin(\phi_0 \phi^*) \approx \phi_0 \phi^* \)), recovering the simple harmonic oscillator.</p>
+                </div>
+
+                <div class="highlight-box mt-4">
+                    <h4 class="font-bold text-lg mb-2">Case B: General Motion (Initial Angle + Velocity)</h4>
+                    <p class="mb-2">
+                        Consider a more general case where the pendulum starts at an angle \( \phi_0 \) <em>and</em> has an initial angular velocity \( d\phi/dt = \Omega_0 \).
+                    </p>
+                    <p class="mb-2">
+                        To find the appropriate scale \( \Phi_R \), we look at the <strong>Total Energy</strong> (Kinetic + Potential). The initial energy is:
+                        $$ E_{total} = \underbrace{\frac{1}{2} m (L \Omega_0)^2}_{\text{Kinetic}} + \underbrace{m g L (1 - \cos \phi_0)}_{\text{Potential}} $$
+                    </p>
+                    <p class="mb-2">
+                        We define the reference scale \( \Phi_R \) as the maximum amplitude \( \Phi_{max} \). At this peak, velocity is zero, so all energy is potential:
+                        $$ E_{total} = m g L (1 - \cos \Phi_{max}) $$
+                    </p>
+                    <p class="mb-4">
+                        Equating the two yields the definition for our scale:
+                        $$ m g L (1 - \cos \Phi_{max}) = \frac{1}{2} m L^2 \Omega_0^2 + m g L (1 - \cos \phi_0) $$
+                    </p>
+
+                    <div class="bg-blue-50 p-4 border-l-4 border-blue-400 my-4">
+                        <h5 class="font-bold text-sm text-blue-800 mb-1">Student Exercise: Linearized Energy Scale</h5>
+                        <p class="text-sm text-slate-700 mb-2">
+                            <strong>Comparison with Computational Model:</strong> Computational models often use a simpler version of the energy scale derived above.
+                        </p>
+                        <p class="text-sm text-slate-700">
+                            <strong>Task:</strong> Starting from the exact energy balance equation above, apply the small angle approximation ($ \cos \theta \approx 1 - \theta^2/2 $) to both cosine terms. Show that this leads to the simplified Pythagorean scale used in such models:
+                        </p>
+                        <div class="text-center my-2 text-sm font-mono text-slate-800">
+                             $$ \Phi_{R} \approx \sqrt{\phi_0^2 + \left( \Omega_0 \sqrt{\frac{L}{g}} \right)^2} $$
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-3 rounded border-l-4 border-red-400 mt-4">
+                        <h5 class="font-bold text-sm text-red-800 mb-1">The Singularity (Impulsive Start)</h5>
+                        <p class="text-sm text-slate-700">
+                            This general energy method (even the simplified one) resolves the "singularity" of the impulsive start. If we had tried to use \( \Phi_R = \phi_0 \) when \( \phi_0 = 0 \) (starting at the bottom with a kick), our dimensionless variable \( \phi^* = \phi/\phi_0 \) would blow up to infinity. 
+                            <br><br>
+                            However, using the energy equation above with \( \phi_0 = 0 \), we get a well-defined \( \Phi_{max} \) driven purely by the kinetic term \( \frac{1}{2} m L^2 \Omega_0^2 \). This confirms that energy is the robust scaling choice for high-speed or mixed regimes.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold mt-6 mb-2">Step 4: The Universal Non-Dimensional Equation</h3>
+                <p class="mb-4">
+                    Regardless of the specific choice of \( \Phi_R \), the time-scaled equation collapses the parameters \( g \) and \( L \) out of the dynamics completely:
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{d^2\phi^*}{d\tau^2} + \sin(\phi^*) = 0 \quad (\text{using } \Phi_R=1 \text{ for simplicity}) $$
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE DIFFUSION EQUATION -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">4. Transition: The Diffusion Equation & Mixing Length</h2>
+            <div class="lecture-note text-slate-700">
+                <p class="mb-4">
+                    Before we jump to the complexity of the Navier-Stokes equations, let’s look at a simpler, linear partial differential equation (PDE) that directly relates to our motivation of ocean mixing: the <strong>Diffusion Equation</strong>. This derivation will make the concept of "mixing length scale" concrete.
+                </p>
+                
+                <h3 class="text-xl font-bold mt-6 mb-2">Step 1: Deriving the Equation</h3>
+                <p class="mb-4">
+                    We start with the principle of <strong>Conservation of Mass</strong> (or Energy). For a tracer concentration \( C \), the rate of change in a volume is equal to the net flux coming in or out.
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{\partial C}{\partial t} + \nabla \cdot \mathbf{J} = 0 $$
+                </div>
+                <p class="mb-4">
+                    Here, \( \mathbf{J} \) is the flux vector. We apply <strong>Fick's Law</strong> (or Fourier's Law for heat), which states that flux moves from high to low concentration:
+                </p>
+                <div class="math-block text-center">
+                    $$ \mathbf{J} = - \kappa \nabla C $$
+                </div>
+                <p class="mb-4">
+                    Substituting this back into the conservation law gives us the Diffusion Equation:
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{\partial C}{\partial t} = \kappa \nabla^2 C $$
+                </div>
+
+                <h3 class="text-xl font-bold mt-6 mb-2">Step 2: Scaling Analysis & The Mixing Length</h3>
+                <p class="mb-4">
+                    Now, let's apply the same scaling technique we used for the pendulum. We introduce characteristic scales:
+                    <ul class="list-disc ml-8 mb-4">
+                        <li>\( \mathcal{T} \): Characteristic Time Scale (e.g., lifespan of an eddy)</li>
+                        <li>\( \mathcal{L} \): Characteristic Length Scale (Mixing Length)</li>
+                    </ul>
+                </p>
+                <p class="mb-4">
+                    Substituting \( t = \mathcal{T} t^* \) and \( x = \mathcal{L} x^* \) into the 1D diffusion equation:
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{C_0}{\mathcal{T}} \frac{\partial C^*}{\partial t^*} = \kappa \frac{C_0}{\mathcal{L}^2} \frac{\partial^2 C^*}{\partial x^{*2}} $$
+                </div>
+                <p class="mb-4">
+                    Dividing by the time coefficient \( C_0 / \mathcal{T} \):
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{\partial C^*}{\partial t^*} = \left[ \frac{\kappa \mathcal{T}}{\mathcal{L}^2} \right] \frac{\partial^2 C^*}{\partial x^{*2}} $$
+                </div>
+                <p class="mb-4">
+                    For the physics to be balanced (invariant), the term in brackets must be of order unity. This gives us the fundamental definition of the <strong>Mixing Length Scale</strong>:
+                </p>
+                <div class="math-block text-center">
+                    $$ \frac{\kappa \mathcal{T}}{\mathcal{L}^2} \sim 1 \implies \mathcal{L} \sim \sqrt{\kappa \mathcal{T}} $$
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>Physical Interpretation:</strong> This result (\( \mathcal{L} \sim \sqrt{\kappa \mathcal{T}} \)) tells us that if we observe a tracer diffusing for a time \( \mathcal{T} \) with diffusivity \( \kappa \), the "patch size" or distance it has traveled is proportional to the square root of time.
+                    <br><br>
+                    In the context of the ocean motivation: If we know the <em>eddy diffusivity</em> \( \kappa \) and the <em>turnover time</em> of an eddy \( \mathcal{T} \), we can immediately predict the size of the water mass \( \mathcal{L} \) that will be mixed.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: NAVIER STOKES -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b pb-2">5. Application to Navier-Stokes</h2>
+            <div class="lecture-note text-slate-700">
+                <p class="mb-4">
+                    Moving to fluid mechanics, we apply this rigorous process to the Navier-Stokes equations. We have 3 dimensions but 7 quantities, leading to 4 dimensionless numbers.
+                </p>
+                <p class="mb-4">
+                    The dimensional momentum equation for incompressible flow is:
+                </p>
+                <div class="math-block text-center">
+                    $$ \rho \left( \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u} \right) = -\nabla p + \mu \nabla^2 \mathbf{u} + \rho \mathbf{g} $$
+                </div>
+                <p class="mb-4">
+                    We introduce characteristic scales: Length \( L \), Velocity \( U \), Density \( \rho \), and Frequency \( \omega \) (or time \( T \)). Substituting these into the equation and dividing by the inertial scale \( \rho U^2 / L \), we obtain the non-dimensional Navier-Stokes equation:
+                </p>
+
+                <div class="math-block text-center text-lg">
+                     $$ St \frac{\partial \mathbf{u}^*}{\partial t^*} + (\mathbf{u}^* \cdot \nabla^*) \mathbf{u}^* = -Eu \nabla^* p^* + \frac{1}{Re} \nabla^{*2} \mathbf{u}^* + \frac{1}{Fr^2} \mathbf{g}^* $$
+                </div>
+
+                <h3 class="text-xl font-bold mt-6 mb-4">The Non-Dimensional Groups</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 border rounded shadow-sm">
+                        <strong class="text-blue-800">Reynolds Number (Re):</strong>
+                        $$ Re = \frac{\rho U L}{\mu} = \frac{\text{Inertial Forces}}{\text{Viscous Forces}} $$
+                        <p class="text-sm mt-2 text-slate-600">Determines if flow is laminar or turbulent.</p>
+                    </div>
+                    <div class="bg-white p-4 border rounded shadow-sm">
+                        <strong class="text-blue-800">Froude Number (Fr):</strong>
+                        $$ Fr = \frac{U}{\sqrt{gL}} = \frac{\text{Inertial Forces}}{\text{Gravitational Forces}} $$
+                        <p class="text-sm mt-2 text-slate-600">Critical in free-surface flows (waves).</p>
+                    </div>
+                    <div class="bg-white p-4 border rounded shadow-sm">
+                        <strong class="text-blue-800">Euler Number (Eu):</strong>
+                        $$ Eu = \frac{\Delta p}{\rho U^2} = \frac{\text{Pressure Forces}}{\text{Inertial Forces}} $$
+                        <p class="text-sm mt-2 text-slate-600">Relates pressure drop to dynamic head.</p>
+                    </div>
+                    <div class="bg-white p-4 border rounded shadow-sm">
+                        <strong class="text-blue-800">Strouhal Number (St):</strong>
+                        $$ St = \frac{\omega L}{U} = \frac{\text{Oscillating Flow}}{\text{Mean Flow}} $$
+                        <p class="text-sm mt-2 text-slate-600">Important for unsteady, oscillating flows.</p>
+                    </div>
+                </div>
+                
+                <p class="mt-6">
+                    In rotating systems, we would introduce the Coriolis term, leading to the <strong>Rossby Number</strong> ($Ro = U / fL$).
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
