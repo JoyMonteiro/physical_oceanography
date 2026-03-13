@@ -14,3 +14,4 @@ view them as and when they are uploaded.
 * Note 3: [Subduction](./subduction.html)
 * Note 4: [Thermodynamics](./ocean_thermo.html)
 * Note 4: [Non-dimensionalization and Scaling](./nondim_scaling.html)
+* Note 5: [The mixed layer and inertial oscillations](./inertial_mixed.html)
