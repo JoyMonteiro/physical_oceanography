@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture: Sverdrup Flow</title>
+    <!-- Added Google Fonts for a cleaner academic look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Loaded Tailwind CSS WITH the typography plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        academic: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: '#334155',
+                                h1: { 
+                                    color: '#0f172a', 
+                                    fontWeight: '700',
+                                    fontFamily: '"Inter", sans-serif'
+                                },
+                                h2: { 
+                                    color: '#0f172a', 
+                                    fontWeight: '700', 
+                                    fontSize: '1.875em',
+                                    borderBottom: '2px solid #e2e8f0', 
+                                    paddingBottom: '0.5rem', 
+                                    marginTop: '3rem',
+                                    marginBottom: '1.5rem',
+                                    fontFamily: '"Inter", sans-serif'
+                                },
+                                h3: { 
+                                    color: '#1e293b', 
+                                    fontWeight: '600', 
+                                    fontSize: '1.5em',
+                                    marginTop: '2.5rem',
+                                    marginBottom: '1rem',
+                                    fontFamily: '"Inter", sans-serif'
+                                },
+                                p: { 
+                                    lineHeight: '1.8',
+                                    marginTop: '1.25em',
+                                    marginBottom: '1.25em'
+                                },
+                                a: { 
+                                    color: '#2563eb', 
+                                    textDecoration: 'none', 
+                                    '&:hover': { textDecoration: 'underline' } 
+                                },
+                                ul: {
+                                    marginTop: '1em',
+                                    marginBottom: '1em'
+                                },
+                                li: {
+                                    marginTop: '0.5em',
+                                    marginBottom: '0.5em'
+                                }
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- MathJax for rendering LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                tags: 'ams'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #f8fafc; }
+        .reference-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 2.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .reference-title { 
+            font-weight: 700; 
+            color: #1e3a8a; 
+            margin-bottom: 0.75rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .math-block { 
+            overflow-x: auto; 
+            margin: 2rem 0; 
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="max-w-4xl mx-auto px-10 py-16 bg-white shadow-sm my-10 rounded-xl border border-gray-200">
+        
+        <header class="mb-14">
+            <h1 class="text-4xl font-bold text-academic-900 mb-4 tracking-tight" style="font-family: 'Inter', sans-serif;">Lecture: Sverdrup Flow</h1>
+            <p class="text-xl text-gray-600 font-light border-b pb-8" style="font-family: 'Inter', sans-serif;">Connecting the Surface Wind Forcing to Deep Ocean Circulation</p>
+        </header>
+
+        <main class="prose prose-lg max-w-none">
+            <p>The massive, basin-scale circulation of the deep ocean is driven by the wind at the surface. However, understanding <em>how</em> this wind forcing penetrates thousands of meters into the abyss requires us to reconcile the geometry of the ocean with the rotation of the Earth.</p>
+            <p>We can construct the theory of Sverdrup flow through a precise logical sequence: surface forcing, geometric constraints, continuity, and finally, the curvature of the planet.</p>
+
+            <h2>1. The Surface Forcing: Ekman Pumping</h2>
+            
+            <p>The atmosphere drives a frictional boundary layer at the ocean surface known as the Ekman layer (roughly the top 50 meters). The vertically integrated mass transport of this layer ($M_x, M_y$) is entirely determined by the surface wind stress ($\boldsymbol{\tau}$):</p>
+
+            <div class="math-block">
+                $$M_x = \frac{\tau_y}{\rho f}, \quad M_y = -\frac{\tau_x}{\rho f}$$
+            </div>
+
+            <p>When the wind field varies spatially, it forces this surface water to horizontally converge or diverge. Taking the horizontal divergence ($\nabla \cdot \mathbf{M}$) yields:</p>
+
+            <div class="math-block">
+                $$\frac{\partial M_x}{\partial x} + \frac{\partial M_y}{\partial y} = \text{Curl}_z \left( \frac{\boldsymbol{\tau}}{\rho f} \right)$$
+            </div>
+
+            <p>By the conservation of mass (continuity), if water is converging horizontally in the surface layer, it must be forced downward. In a steady state, the horizontal wind-driven convergence is balanced entirely by a vertical velocity at the base of the Ekman layer, known as <strong>Ekman pumping</strong> ($w_E$):</p>
+
+            <div class="math-block">
+                $$-w_E = \nabla \cdot \mathbf{M} = \text{Curl}_z \left( \frac{\boldsymbol{\tau}}{\rho f} \right)$$
+            </div>
+
+            <p>In the subtropical gyres, this downward velocity is incredibly small: roughly <strong>300 meters per year</strong> (on the order of $10^{-5}$ m/s).</p>
+
+            <div class="reference-box">
+                <div class="reference-title">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Reading Reference: Stewart
+                </div>
+                <p class="text-blue-900 mb-0 text-base">For a detailed derivation of Ekman transports and the resulting vertical pumping velocities, refer to <strong>Chapter 9: Response of the Upper Ocean to Winds</strong> in Stewart's <em>Introduction to Physical Oceanography</em>.</p>
+            </div>
+
+            <h2>2. The Geometric Dilemma and Continuity</h2>
+
+            <p>The deep, geostrophic interior ocean sits directly beneath this moving Ekman lid, forced to respond to the injected vertical velocity ($w_E$).</p>
+            <p>This creates a geometric dilemma. The ocean is bounded by a solid, impermeable rock floor at depth $H$ (roughly 4,000 meters). Because water cannot flow through rock, the vertical velocity must vanish at the bottom boundary:</p>
+            
+            <ul>
+                <li><strong>Top Boundary:</strong> $w(0) = -w_E$</li>
+                <li><strong>Bottom Boundary:</strong> $w(-H) = 0$</li>
+            </ul>
+
+            <p>Because the vertical velocity goes from a non-zero value at the top to zero at the bottom, there is a net vertical compression of the water column. Water is effectively incompressible. Furthermore, due to the rapid rotation of the Earth, the fluid tends to act as rigid vertical pillars (Taylor columns), meaning the entire 4,000-meter column responds to this compression.</p>
+
+            <p>To satisfy the 3D continuity equation ($\nabla_h \cdot \mathbf{u} + \frac{\partial w}{\partial z} = 0$), a vertical compression <em>must</em> be perfectly balanced by a horizontal divergence. Integrating continuity over the depth of the deep ocean, we find:</p>
+
+            <div class="math-block">
+                $$\nabla_h \cdot \mathbf{U}_g = w_E$$
+            </div>
+
+            <p><em>(Where $\mathbf{U}_g$ is the total horizontal geostrophic transport).</em> Because it is confined by a solid floor, the deep geostrophic layer is mathematically required to diverge horizontally to accommodate the water pumped down from the surface.</p>
+
+            <h2>3. The Geostrophic Constraint: Failure of the $f$-plane</h2>
+
+            <p>This requirement for horizontal divergence creates a critical physical conflict.</p>
+            <p>Let us temporarily assume the Earth is a flat, rotating plane where the Coriolis parameter is constant (an <strong>$f$-plane</strong>). The deep ocean is frictionless and in geostrophic balance:</p>
+
+            <div class="math-block">
+                $$-fv_g = -\frac{1}{\rho_0} \frac{\partial P}{\partial x}, \quad fu_g = -\frac{1}{\rho_0} \frac{\partial P}{\partial y}$$
+            </div>
+
+            <p>If we calculate the horizontal divergence of this geostrophic flow ($\frac{\partial u_g}{\partial x} + \frac{\partial v_g}{\partial y}$), the cross-derivatives of the pressure field cancel out exactly. Therefore, strictly geostrophic flow on an $f$-plane is <strong>perfectly non-divergent</strong> ($\nabla_h \cdot \mathbf{u}_g = 0$).</p>
+
+            <p>If the horizontal divergence of the geostrophic layer is zero, it is physically impossible for it to absorb the vertical mass flux from the Ekman layer. An $f$-plane ocean is too "rigid" to accommodate Ekman pumping.</p>
+
+            <h3>3.1 Scaling the Scales: Why the $f$-plane works for the surface but not the deep</h3>
+
+            <p>Why is the $f$-plane approximation valid for calculating surface Ekman transport, but invalid for the deep ocean? We can answer this by scaling the continuity requirement: $\frac{U}{L} \sim \frac{W}{H}$, where $L$ is the horizontal length scale required to absorb the vertical velocity.</p>
+
+            <div class="math-block">
+                $$L \sim U \frac{H}{W}$$
+            </div>
+
+            <p>Using typical ocean velocities ($U \sim 10^{-2}$ m/s, $W \sim 10^{-5}$ m/s):</p>
+            <ul>
+                <li><strong>The Ekman Layer ($H \sim 100$ m):</strong> The required horizontal length scale is $L \sim 100$ km. Over 100 km, the Coriolis parameter ($f$) barely changes. The $f$-plane approximation is valid here.</li>
+                <li><strong>The Deep Ocean ($H \sim 4000$ m):</strong> The required horizontal length scale is $L \sim 4,000$ km. This spans an entire ocean basin.</li>
+            </ul>
+
+            <p>Over 4,000 km, the rotation of the Earth varies significantly. The $f$-plane approximation fundamentally breaks down for the deep ocean because it fails to capture the planetary-scale geometry required to absorb Ekman pumping.</p>
+
+            <h2>4. The Spherical Resolution: Deriving Sverdrup Balance</h2>
+
+            <p>The resolution to this paradox is the spherical nature of the Earth; the Coriolis parameter must vary with latitude ($\beta = \frac{\partial f}{\partial y} \neq 0$). This is the <strong>$\beta$-effect</strong>.</p>
+
+            <p>Taking the cross-derivatives of the geostrophic equations while allowing $f$ to vary yields the planetary vorticity equation:</p>
+
+            <div class="math-block">
+                $$f \left( \frac{\partial u_g}{\partial x} + \frac{\partial v_g}{\partial y} \right) + \beta v_g = 0 \quad \implies \quad \nabla_h \cdot \mathbf{u}_g = -\frac{\beta}{f} v_g$$
+            </div>
+
+            <p>The $\beta$-effect provides the crucial dynamic mechanism. Geostrophic flow <em>can</em> diverge, provided there is a corresponding meridional (north-south) velocity, $v_g$. Integrating this over the deep ocean layer, the horizontal divergence must equal the vertical Ekman pumping ($w_E$):</p>
+
+            <div class="math-block">
+                $$\beta V_g = -f w_E$$
+            </div>
+
+            <p>This demonstrates that the vertical mass flux from the wind-driven layer ($w_E$) is balanced by a horizontal, equatorward transport in the deep layer ($V_g$). There are two primary mathematical approaches to derive the full Sverdrup transport, both detailed below.</p>
+
+            <div class="reference-box">
+                <div class="reference-title">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Reading Reference: Stewart
+                </div>
+                <p class="text-blue-900 mb-0 text-base">To review the formal, full-column integration exactly as it was historically formulated, refer to <strong>Chapter 11: Wind Driven Ocean Circulation, Section 11.1 (Sverdrup's Theory of the Oceanic Circulation)</strong>. Stewart lays out the following integration method explicitly.</p>
+            </div>
+
+            <h3>4.1 Method 1: The Formal Full-Column Integration</h3>
+
+            <p>To find the <em>total</em> transport of the entire water column ($V_{total} = V_{Ekman} + V_{geostrophic}$), we integrate the full momentum equations from the ocean floor ($-H$) to the surface ($\eta$):</p>
+
+            <div class="math-block">
+                $$-fV = -\frac{1}{\rho_0} \int_{-H}^{\eta} \frac{\partial P}{\partial x} dz + \frac{\tau_x}{\rho_0}$$
+                $$fU = -\frac{1}{\rho_0} \int_{-H}^{\eta} \frac{\partial P}{\partial y} dz + \frac{\tau_y}{\rho_0}$$
+            </div>
+            <p><em>(Note: Surface friction is $\boldsymbol{\tau}$, bottom friction is assumed to be zero).</em></p>
+
+            <p>Taking the cross-derivatives to eliminate pressure, and applying the $\beta$-effect ($\frac{\partial f}{\partial y} = \beta$):</p>
+
+            <div class="math-block">
+                $$f \left( \frac{\partial U}{\partial x} + \frac{\partial V}{\partial y} \right) + \beta V = \frac{1}{\rho_0} \text{Curl}_z(\boldsymbol{\tau})$$
+            </div>
+
+            <p>Because the net horizontal divergence of the <em>entire</em> bounded water column from floor to surface must be zero ($\nabla \cdot \mathbf{U} = 0$), the first term vanishes, leaving the fundamental <strong>Sverdrup Balance</strong>:</p>
+
+            <div class="math-block">
+                $$\beta V = \frac{1}{\rho_0} \text{Curl}_z(\boldsymbol{\tau})$$
+            </div>
+
+            <p>This equation dictates that the total meridional transport of the entire ocean column ($V$) is governed entirely by the curl of the wind stress at the surface.</p>
+
+            <h3>4.2 Method 2: The Interior Vorticity Equation (Rigid Lid)</h3>
+
+            <p>An alternative derivation isolates the deep geostrophic interior by treating the Ekman pumping ($w_E$) as an imposed vertical velocity at a conceptual "rigid lid" (the base of the Ekman layer at $z=0$).</p>
+
+            <p>Starting with the localized planetary vorticity equation for the frictionless deep interior derived earlier:</p>
+            <div class="math-block">
+                $$\beta v_g = f \frac{\partial w}{\partial z}$$
+            </div>
+
+            <p>We integrate this relation over the depth of the geostrophic interior, from the flat ocean floor ($z = -H$) up to the base of the Ekman layer ($z = 0$):</p>
+            <div class="math-block">
+                $$\int_{-H}^{0} \beta v_g \, dz = \int_{-H}^{0} f \frac{\partial w}{\partial z} \, dz$$
+            </div>
+
+            <p>The left side represents the geostrophic meridional transport ($\beta V_g$). Evaluating the right side at the vertical boundaries gives $f [w(0) - w(-H)]$. Given $w(-H) = 0$ and $w(0) = -w_E$ (downward pumping), this leaves:</p>
+            <div class="math-block">
+                $$\beta V_g = -f w_E$$
+            </div>
+
+            <p>To obtain the <em>total</em> Sverdrup transport ($V$), we add the surface Ekman transport ($V_E$) back to the geostrophic transport: $V = V_g + V_E$.</p>
+
+            <p>From Ekman theory, the downward pumping velocity is $-w_E = \frac{\partial}{\partial x}\left(\frac{\tau_y}{\rho_0 f}\right) - \frac{\partial}{\partial y}\left(\frac{\tau_x}{\rho_0 f}\right)$. Expanding this derivative using the quotient rule yields:</p>
+            <div class="math-block">
+                $$-w_E = \frac{1}{\rho_0 f} \text{Curl}_z(\boldsymbol{\tau}) + \frac{\beta \tau_x}{\rho_0 f^2}$$
+            </div>
+
+            <p>Substituting this into our integrated geostrophic balance ($\beta V_g = -f w_E$):</p>
+            <div class="math-block">
+                $$\beta V_g = \frac{1}{\rho_0} \text{Curl}_z(\boldsymbol{\tau}) + \frac{\beta \tau_x}{\rho_0 f}$$
+            </div>
+
+            <p>Recognizing that the meridional Ekman transport is $V_E = -\frac{\tau_x}{\rho_0 f}$, the final term is mathematically equivalent to $-\beta V_E$. Thus:</p>
+            <div class="math-block">
+                $$\beta V_g = \frac{1}{\rho_0} \text{Curl}_z(\boldsymbol{\tau}) - \beta V_E$$
+            </div>
+
+            <p>Rearranging to sum the geostrophic and Ekman components yields $\beta (V_g + V_E)$, successfully recovering the full total balance:</p>
+            <div class="math-block">
+                $$\beta V = \frac{1}{\rho_0} \text{Curl}_z(\boldsymbol{\tau})$$
+            </div>
+
+            <h2>5. The Consequence: The Steady-State Surface Anomaly ($\eta$)</h2>
+
+            <p>While Sverdrup flow describes vertically integrated mass transport, it manifests physically through pressure gradients in the deep ocean, which are sustained by a sloping sea surface anomaly ($\eta$).</p>
+
+            <h3>5.1 Solving for the Surface Slope</h3>
+
+            <p>We can determine the shape of this surface anomaly by relating the wind-driven Sverdrup transport to the geostrophic pressure gradient. Assuming the deep ocean exhibits a relatively uniform geostrophic velocity $v_g$ down to depth $H$:</p>
+
+            <div class="math-block">
+                $$V_{Sverdrup} \approx H v_g = H \frac{g}{f} \frac{\partial \eta}{\partial x}$$
+            </div>
+
+            <p>Equating this to the wind forcing ($\beta V = \frac{1}{\rho_0} \text{Curl}_z(\boldsymbol{\tau})$):</p>
+            <div class="math-block">
+                $$H \frac{g}{f} \frac{\partial \eta}{\partial x} = \frac{1}{\beta \rho_0} \text{Curl}_z(\boldsymbol{\tau}) \quad \implies \quad \frac{\partial \eta}{\partial x} = \frac{f}{\beta g H \rho_0} \text{Curl}_z(\boldsymbol{\tau})$$
+            </div>
+
+            <p>To find the actual surface height $\eta$, we integrate this slope. The integration must commence at the <strong>Eastern Boundary</strong> of the ocean basin. Because water cannot flow through the solid continent, the zonal velocity $u = 0$ at the boundary. By geostrophy, if $u=0$, there is no meridional slope, allowing us to treat $\eta$ as a flat constant ($\eta_0$) along the eastern boundary. Integrating westward across the basin:</p>
+
+            <div class="math-block">
+                $$\eta(x) = \eta_0 - \int_{x_{east}}^{x} \frac{f}{\beta g H \rho_0} \text{Curl}_z(\boldsymbol{\tau}) \, dx'$$
+            </div>
+
+            <p>This mathematical relationship confirms that the "hill" of water within subtropical gyres is not centered in the middle of the ocean. The surface anomaly accumulates cumulatively from east to west, pushing the peak of the pressure anomaly toward the western side of the basin.</p>
+
+            <h3>5.2 Reconciling with Observations: The Asymmetrical Gyre</h3>
+
+            <div class="reference-box">
+                <div class="reference-title">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Reading Reference: Stewart
+                </div>
+                <p class="text-blue-900 mb-0 text-base">For observational context on these surface anomalies, review <strong>Chapter 10: Geostrophic Currents</strong>, particularly the sections discussing satellite altimetry and dynamic topography, which map these asymmetrical surface peaks directly.</p>
+            </div>
+
+            <p>Satellite altimetry confirms that the sea surface height does not peak directly on the western shoreline; rather, the highest point is detached from the coast (e.g., the Sargasso Sea in the North Atlantic).</p>
+
+            <p>This is because Sverdrup theory only describes the frictionless interior (the eastern ~90% of the basin). Following the integration from east to west, the wind stress curl builds a vast, thousands-of-kilometers-long gentle slope.</p>
+
+            <p>However, near the western coast, the Sverdrup balance breaks down entirely. Here, the narrow, highly frictional western boundary current (e.g., the Gulf Stream) transports water rapidly back to the north. Geostrophy dictates that this immense northward velocity must be balanced by a steep westward pressure gradient. Therefore, across this narrow boundary layer, the sea surface height decreases steeply to meet the coastline. The "peak" of the gyre represents the dynamic ridge where the broad Sverdrup interior meets the steep boundary current gradient.</p>
+
+            <h2>6. Zonal Transport and the Discovery of Counter-Currents</h2>
+
+            <p>While the Sverdrup relation directly yields the meridional (north-south) transport, $V$, we can utilize the continuity equation to completely solve for the zonal (east-west) transport, $U$. Harald Sverdrup originally applied this framework to the equatorial Pacific in his landmark 1947 paper to explain the enigmatic eastward counter-currents observed there.</p>
+
+            <h3>6.1 Step-by-Step Derivation of Zonal Transport ($U$)</h3>
+
+            <p>We begin with the vertically integrated continuity equation for a steady-state ocean basin:</p>
+            <div class="math-block">
+                $$\frac{\partial U}{\partial x} + \frac{\partial V}{\partial y} = 0 \quad \implies \quad \frac{\partial U}{\partial x} = -\frac{\partial V}{\partial y}$$
+            </div>
+
+            <p>To find the zonal transport $U(x, y)$ at any longitude $x$, we integrate this expression from an arbitrary longitude $x$ eastward to the eastern continental boundary ($x_E$):</p>
+            <div class="math-block">
+                $$\int_{x}^{x_E} \frac{\partial U}{\partial x'} \, dx' = -\int_{x}^{x_E} \frac{\partial V}{\partial y} \, dx'$$
+                $$U(x_E) - U(x) = -\int_{x}^{x_E} \frac{\partial V}{\partial y} \, dx'$$
+            </div>
+
+            <p>Applying the kinematic boundary condition $U(x_E) = 0$ at the solid eastern boundary:</p>
+            <div class="math-block">
+                $$-U(x) = -\int_{x}^{x_E} \frac{\partial V}{\partial y} \, dx' \quad \implies \quad U(x) = \int_{x}^{x_E} \frac{\partial V}{\partial y} \, dx'$$
+            </div>
+
+            <p>For mathematical simplicity in the tropics, we assume the wind stress is predominantly zonal and varies only with latitude: $\boldsymbol{\tau} = (\tau_x(y), 0)$. The wind stress curl simplifies to $-\frac{\partial \tau_x}{\partial y}$, yielding a meridional transport of:</p>
+            <div class="math-block">
+                $$V = -\frac{1}{\beta \rho_0} \frac{\partial \tau_x}{\partial y}$$
+            </div>
+
+            <p>To find the meridional derivative ($\frac{\partial V}{\partial y}$), we apply the quotient rule (since both $\tau_x$ and $\beta$ vary with $y$):</p>
+            <div class="math-block">
+                $$\frac{\partial V}{\partial y} = \frac{\partial}{\partial y} \left( -\frac{1}{\beta \rho_0} \frac{\partial \tau_x}{\partial y} \right) = -\frac{1}{\rho_0} \left[ \frac{1}{\beta} \frac{\partial^2 \tau_x}{\partial y^2} - \frac{1}{\beta^2} \frac{\partial \beta}{\partial y} \frac{\partial \tau_x}{\partial y} \right]$$
+            </div>
+
+            <p>Across narrow equatorial wind bands (such as the doldrums), the wind stress changes much more rapidly with latitude than the planetary $\beta$ parameter. Therefore, the second derivative of the wind stress dominates ($\frac{1}{\beta} \frac{\partial^2 \tau_x}{\partial y^2} \gg \frac{1}{\beta^2} \frac{\partial \beta}{\partial y} \frac{\partial \tau_x}{\partial y}$). Neglecting the variation of $\beta$ in this derivative simplifies the expression to:</p>
+            <div class="math-block">
+                $$\frac{\partial V}{\partial y} \approx -\frac{1}{\beta \rho_0} \frac{\partial^2 \tau_x}{\partial y^2}$$
+            </div>
+
+            <p>Substituting this dominant term back into our integral for $U(x)$, and pulling the integrand outside the integral (since we assumed $\tau_x$ is independent of longitude $x'$):</p>
+            <div class="math-block">
+                $$U(x) = \int_{x}^{x_E} \left( -\frac{1}{\beta \rho_0} \frac{\partial^2 \tau_x}{\partial y^2} \right) \, dx' = -\frac{1}{\beta \rho_0} \frac{\partial^2 \tau_x}{\partial y^2} \int_{x}^{x_E} dx'$$
+            </div>
+
+            <p>Evaluating the integral yields the exact analytical form for zonal transport:</p>
+            <div class="math-block">
+                $$U(x, y) = -\frac{(x_E - x)}{\beta \rho_0} \frac{\partial^2 \tau_x}{\partial y^2}$$
+            </div>
+
+            <h3>6.2 The Magnitude of Zonal Currents</h3>
+
+            <p>This equation reveals a crucial geometric feature of wind-driven ocean circulation. Because the integration proceeds westward from the eastern boundary, the spatial term $(x_E - x)$ is strictly positive and grows linearly.</p>
+
+            <p>Consequently, the magnitude of the zonal transport $|U|$ is directly proportional to the distance from the eastern boundary. As water is advected equatorward across the basin, it must continually turn westward to satisfy mass conservation. <strong>Zonal transport accumulates and intensifies linearly toward the west.</strong> This mathematical accumulation explains why ocean currents are sluggish and broad on the eastern side of a basin (e.g., the California Current) but become concentrated and intense on the western side.</p>
+
+            <h3>6.3 The North Equatorial Countercurrent</h3>
+
+            <p>This derivation also provides profound insight regarding the direction of the currents, which is governed entirely by the <strong>second derivative</strong> of the wind stress ($\frac{\partial^2 \tau_x}{\partial y^2}$) combined with the leading negative sign.</p>
+
+            <p>In the tropical Pacific, the prevailing trade winds blow westward, establishing a negative zonal wind stress ($\tau_x < 0$). Intuition might suggest that westward winds must solely produce westward ocean currents.</p>
+
+            <p>However, between the Northeast and Southeast Trades lies the Intertropical Convergence Zone (ITCZ), or "doldrums"—a distinct band where the westward winds weaken significantly. As the magnitude of the westward wind decreases (approaching zero) and then increases again across this latitudinal band, $\tau_x$ forms a local algebraic maximum.</p>
+
+            <p>At a local maximum, the second derivative must be negative: $\frac{\partial^2 \tau_x}{\partial y^2} < 0$. Evaluating the sign of our zonal transport equation at the ITCZ:</p>
+
+            <div class="math-block">
+                $$U = - (\text{positive distance}) \times (\text{positive constants}) \times (\text{negative second derivative})$$
+            </div>
+
+            <p>The two negative signs cancel, dictating that the zonal transport $U$ becomes <strong>positive (eastward)</strong>.</p>
+
+            <p>Sverdrup demonstrated mathematically that latitudinal variations in the wind field—specifically the wind minimum at the doldrums—force the underlying ocean to flow <em>against</em> the prevailing trade winds. This accurately predicted the existence and spatial position of the eastward-flowing <strong>North Equatorial Countercurrent</strong>.</p>
+
+            <h2>7. Transitioning to Potential Vorticity</h2>
+
+            <p>Throughout this derivation, we have relied on a recurring mechanical principle: vertical compression of the ocean column forces corresponding horizontal flow. This dynamic behavior is formally governed by the conservation of <strong>Potential Vorticity (PV)</strong>, a fundamental property of geophysical fluids to be explored in subsequent lectures. By analyzing Sverdrup transport as a component of the global vorticity budget, we can mathematically resolve why intense boundary currents must form specifically on the western margins to close the oceanic mass balance.</p>
+
+        </main>
+    </div>
+</body>
+</html>
