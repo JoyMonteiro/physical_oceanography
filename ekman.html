@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oceanography Lectures: Ekman Spirals & Pumping</title>
+    
+    <!-- Tailwind CSS with Typography Plugin for elegant reading -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- MathJax Configuration for LaTeX rendering -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Ensures equations can scroll horizontally on mobile devices */
+        .math-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-blue-200">
+
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white shadow-sm min-h-screen">
+        <article class="prose prose-lg prose-blue max-w-none">
+            
+            <!-- LECTURE 1: EKMAN SPIRALS -->
+            <h1>Lecture: The Ekman Spiral - Balancing Rotation and Turbulent Friction</h1>
+
+            <h2>1. Introduction: Wind Over a Rotating Ocean</h2>
+            <p>When a steady wind blows across the surface of the ocean, intuition tells us the water should simply be dragged along in the same direction. However, late 19th-century observations by Fridtjof Nansen during his Arctic expedition on the <em>Fram</em> revealed something perplexing: icebergs did not drift straight downwind, but rather at an angle of roughly 20 to 40 degrees to the right of the wind.</p>
+            <p>Nansen correctly hypothesized that the Earth's rotation was responsible, but it took his student, Vagn Walfrid Ekman, to mathematically formalize this in 1905. To understand how wind drag propagates downward through the water column on a rotating planet, we must apply our non-dimensional scaling techniques to the Navier-Stokes equations and find the regime where wind stress, turbulent friction, and the Coriolis force find a perfect, steady balance.</p>
+
+            <h2>2. Regime Identification via Non-Dimensional Numbers</h2>
+            <p>We begin with the horizontal momentum equations on an $f$-plane. Based on our earlier lecture on diffusion, we know the ocean is highly turbulent, so we immediately replace molecular viscosity ($\nu$) with vertical eddy diffusivity/viscosity ($K_z$):</p>
+            
+            <div class="math-display">
+            $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} - fv = -\frac{1}{\rho} \frac{\partial P}{\partial x} + K_z \frac{\partial^2 u}{\partial z^2}$$
+            </div>
+            <div class="math-display">
+            $$\frac{\partial v}{\partial t} + u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} + fu = -\frac{1}{\rho} \frac{\partial P}{\partial y} + K_z \frac{\partial^2 v}{\partial z^2}$$
+            </div>
+
+            <p>To isolate the Ekman problem, we must evaluate our dimensionless numbers to strip the equations down to their core physics.</p>
+
+            <p><strong>Linearization and the Rossby Number ($Ro$):</strong><br>
+            To justify linearization, we compare the non-linear advective acceleration ($U^2/L$) directly to the dominant rotational term, the Coriolis force ($fU$). The ratio of these forces is the spatial Rossby number ($Ro$):</p>
+            <div class="math-display">
+            $$Ro = \frac{U^2/L}{fU} = \frac{U}{fL}$$
+            </div>
+            <p>For large-scale wind-driven currents in the open ocean, the velocities are moderate ($U \sim 0.1$ m/s) and spatial variations are vast ($L \sim 10^5$ m). Thus, $Ro \ll 1$. This justifies <strong>linearization</strong>, allowing us to safely drop the advective terms ($u \frac{\partial u}{\partial x}$, etc.).</p>
+
+            <p><strong>The Temporal Scale (Steady State):</strong><br>
+            Next, we determine if the flow is in a steady state by comparing the local time-derivative ($\frac{\partial u}{\partial t} \sim \frac{U}{T}$) to the Coriolis force ($fU$). This gives a temporal dimensionless number (often called the temporal Rossby number):</p>
+            <div class="math-display">
+            $$\frac{\text{Local Acceleration}}{\text{Coriolis}} \sim \frac{U/T}{fU} = \frac{1}{fT}$$
+            </div>
+            <p>If the wind has been blowing steadily for several days, the time scale of the flow ($T$) is much greater than the inertial period ($1/f \sim 17$ hours). Therefore, $\frac{1}{fT} \ll 1$. The flow has reached a <strong>steady state</strong>, allowing us to safely drop $\frac{\partial u}{\partial t}$ and $\frac{\partial v}{\partial t}$.</p>
+
+            <p><strong>The Unpressurized Assumption:</strong><br>
+            We assume we are in the vast open ocean, far from coastal boundaries where water might pile up to create pressure gradients. The sea surface is completely flat, meaning $\frac{\partial P}{\partial x} = \frac{\partial P}{\partial y} = 0$.</p>
+
+            <p><strong>The Resulting Balance (The Ekman Number):</strong><br>
+            After dropping advection, local acceleration, and pressure gradients, we are left with a pure balance between the Coriolis force and vertical turbulent friction:</p>
+            <div class="math-display">
+            $$-fv = K_z \frac{\partial^2 u}{\partial z^2}$$
+            </div>
+            <div class="math-display">
+            $$fu = K_z \frac{\partial^2 v}{\partial z^2}$$
+            </div>
+            <p>Let's scale this remaining balance. Comparing the friction term ($K_z U / H^2$) to the Coriolis term ($fU$), we recover the <strong>Ekman number</strong> ($Ek$):</p>
+            <div class="math-display">
+            $$Ek = \frac{K_z}{f H^2}$$
+            </div>
+            <p>The physical regime where these two forces are perfectly balanced is where $Ek \sim 1$. Solving for $H$, we find the characteristic vertical length scale of this layer: $H \sim \sqrt{K_z/f}$. This defines the depth over which wind influence penetrates the rotating ocean.</p>
+
+            <h2>3. Boundary Conditions: Forcing the System</h2>
+            <p>To solve these coupled equations, we need to define the boundaries of our fluid column.</p>
+            <ol>
+                <li><strong>At the Surface ($z = 0$):</strong> The wind exerts a shear stress on the water. Assuming the wind blows purely in the positive $y$-direction (North), the surface stress $\tau$ is entirely in the $y$-component. Using our turbulent gradient transport theory:
+                <div class="math-display">$$\rho K_z \frac{\partial u}{\partial z} = 0$$</div>
+                <div class="math-display">$$\rho K_z \frac{\partial v}{\partial z} = \tau_y$$</div>
+                </li>
+                <li><strong>At the Deep Ocean ($z \to -\infty$):</strong> Far below the surface, the turbulent friction from the wind dies out entirely. The velocities must vanish:
+                <div class="math-display">$$u, v \to 0 \quad \text{as} \quad z \to -\infty$$</div>
+                </li>
+            </ol>
+
+            <h2>4. The Solution: The Ekman Spiral</h2>
+            <p>We have a system of two coupled, second-order ordinary differential equations. A highly elegant mathematical trick to solve them is to combine $u$ and $v$ into a single complex velocity variable: $V = u + iv$.</p>
+            <p>Multiplying the second Ekman equation by $i$ and adding it to the first yields:</p>
+            <div class="math-display">
+            $$-fv + ifu = K_z \left( \frac{\partial^2 u}{\partial z^2} + i \frac{\partial^2 v}{\partial z^2} \right)$$
+            </div>
+            <div class="math-display">
+            $$if(u + iv) = K_z \frac{\partial^2}{\partial z^2}(u + iv)$$
+            </div>
+            <div class="math-display">
+            $$i \frac{f}{K_z} V = \frac{\partial^2 V}{\partial z^2}$$
+            </div>
+            <p>This is a standard second-order, linear homogeneous ODE:</p>
+            <div class="math-display">
+            $$\frac{\partial^2 V}{\partial z^2} - i \frac{f}{K_z} V = 0$$
+            </div>
+
+            <p><strong>Step 1: Find the roots of the characteristic equation.</strong><br>
+            Assuming a solution of the form $V \sim e^{rz}$, the characteristic equation is:</p>
+            <div class="math-display">
+            $$r^2 - i \frac{f}{K_z} = 0 \implies r = \pm \sqrt{i \frac{f}{K_z}}$$
+            </div>
+            <p>To evaluate $\sqrt{i}$, we use Euler's formula ($e^{i\pi/2} = i$), which gives $\sqrt{i} = e^{i\pi/4} = \cos(\frac{\pi}{4}) + i\sin(\frac{\pi}{4}) = \frac{1+i}{\sqrt{2}}$.<br>
+            Substituting this back, the roots are:</p>
+            <div class="math-display">
+            $$r = \pm (1+i)\sqrt{\frac{f}{2K_z}}$$
+            </div>
+            <p>Notice that the term $\sqrt{2K_z / f}$ is exactly our Ekman Depth length scale (which we will define as $D$). So, we can write the roots simply as $r = \pm \frac{1+i}{D}$.</p>
+
+            <p><strong>Step 2: Write the general solution and apply the deep boundary condition.</strong><br>
+            The general solution is a linear combination of the two exponential roots:</p>
+            <div class="math-display">
+            $$V(z) = A e^{(1+i)z/D} + B e^{-(1+i)z/D}$$
+            </div>
+            <p>As $z \to -\infty$ (deep ocean), the term $e^{-(1+i)z/D}$ expands to $e^{-z/D}e^{-iz/D}$. Because $z$ is negative, $-z/D$ becomes positive, and $e^{-z/D}$ grows to infinity. Since velocities must vanish in the deep ocean, the constant $B$ must be $0$. We are left with:</p>
+            <div class="math-display">
+            $$V(z) = A e^{(1+i)z/D}$$
+            </div>
+
+            <p><strong>Step 3: Apply the surface boundary condition.</strong><br>
+            At the surface ($z = 0$), the wind stress is applied purely in the $y$-direction ($\tau_y$). In our complex notation, the surface stress boundary condition is $\rho K_z \frac{\partial}{\partial z}(u + iv) = i\tau_y$, so:</p>
+            <div class="math-display">
+            $$\rho K_z \frac{\partial V}{\partial z} = i \tau_y \quad \text{at} \quad z = 0$$
+            </div>
+            <p>Taking the derivative of our solution $V(z)$:</p>
+            <div class="math-display">
+            $$\frac{\partial V}{\partial z} = A \left( \frac{1+i}{D} \right) e^{(1+i)z/D}$$
+            </div>
+            <p>Evaluating at $z=0$:</p>
+            <div class="math-display">
+            $$\frac{\partial V}{\partial z}\bigg|_{z=0} = A \left( \frac{1+i}{D} \right)$$
+            </div>
+            <p>Setting this equal to the boundary condition:</p>
+            <div class="math-display">
+            $$\rho K_z A \left( \frac{1+i}{D} \right) = i \tau_y$$
+            </div>
+            <p>Solving for $A$:</p>
+            <div class="math-display">
+            $$A = \frac{i \tau_y D}{\rho K_z (1+i)}$$
+            </div>
+
+            <p><strong>Step 4: Simplify the complex constant $A$.</strong><br>
+            Multiply the numerator and denominator by the complex conjugate $(1-i)$:</p>
+            <div class="math-display">
+            $$A = \frac{i(1-i) \tau_y D}{\rho K_z (1^2 + 1^2)} = \frac{(i - i^2) \tau_y D}{2 \rho K_z} = \frac{(1+i) \tau_y D}{2 \rho K_z}$$
+            </div>
+            <p>We can rewrite $(1+i)$ in polar form as $\sqrt{2} e^{i\pi/4}$.<br>
+            Substitute our definition of $D = \sqrt{2K_z/f}$:</p>
+            <div class="math-display">
+            $$A = \frac{\sqrt{2} e^{i\pi/4} \tau_y \left(\sqrt{2K_z/f}\right)}{2 \rho K_z} = \frac{2 e^{i\pi/4} \tau_y \sqrt{K_z/f}}{2 \rho K_z} = \frac{\tau_y}{\rho \sqrt{f K_z}} e^{i\pi/4}$$
+            </div>
+            <p>Let's define the magnitude of this surface velocity as $V_0 = \frac{\tau_y}{\rho \sqrt{f K_z}}$. Thus, $A = V_0 e^{i\pi/4}$.</p>
+
+            <p><strong>Step 5: Assemble the final solution.</strong><br>
+            Substitute $A$ back into our equation for $V(z)$:</p>
+            <div class="math-display">
+            $$V(z) = V_0 e^{i\pi/4} e^{(1+i)z/D} = V_0 e^{z/D} e^{i(z/D + \pi/4)}$$
+            </div>
+            <p>Finally, use Euler's formula to separate the complex velocity $V$ back into its real ($u$) and imaginary ($v$) components:</p>
+            <div class="math-display">
+            $$u(z) = \text{Re}(V) = V_0 e^{z/D} \cos\left(\frac{\pi}{4} + \frac{z}{D}\right)$$
+            </div>
+            <div class="math-display">
+            $$v(z) = \text{Im}(V) = V_0 e^{z/D} \sin\left(\frac{\pi}{4} + \frac{z}{D}\right)$$
+            </div>
+            <p>Where:</p>
+            <ul>
+                <li>$V_0 = \frac{\tau_y}{\rho \sqrt{f K_z}}$ is the magnitude of the surface velocity.</li>
+                <li>$D = \sqrt{\frac{2K_z}{f}}$ is the <strong>Ekman Depth</strong> (the exact mathematical formulation of the scale $H$ we found via non-dimensionalization).</li>
+            </ul>
+
+            <p><em>Physical Meaning:</em> Let's unpack these remarkable equations:</p>
+            <ol>
+                <li><strong>Surface Angle:</strong> At the surface ($z=0$), the exponential term is $1$. The velocity components are $u = V_0 \cos(\pi/4)$ and $v = V_0 \sin(\pi/4)$. Since the wind is blowing purely in the $v$ (North) direction, the surface current is flowing exactly $45^\circ$ <strong>to the right of the wind</strong>! (In the Northern Hemisphere where $f>0$).</li>
+                <li><strong>The Spiral:</strong> As we move deeper ($z$ becomes increasingly negative), the angle $(\pi/4 + z/D)$ changes, causing the velocity vector to rotate further to the right.</li>
+                <li><strong>Exponential Decay:</strong> Simultaneously, the $e^{z/D}$ term causes the speed of the current to drop exponentially. At depth $z = -\pi D$, the current is flowing exactly opposite to the surface current, but its speed is reduced by a factor of $e^{-\pi} \approx 0.04$ (only 4% of the surface speed).</li>
+            </ol>
+
+            <h2>5. Quantitative Estimates: Molecular vs. Eddy Viscosity</h2>
+            <p>Why did Nansen observe icebergs moving at 20-40 degrees, and not the theoretical 45 degrees? And how deep does this spiral go? Let's plug in numbers.</p>
+            <p>Let $f \sim 10^{-4} \text{ s}^{-1}$ (mid-latitudes).</p>
+
+            <p><strong>Scenario A: A Non-Turbulent Ocean (Molecular Viscosity)</strong><br>
+            What if the ocean flow was perfectly smooth and laminated? The molecular kinematic viscosity of seawater is $\nu \sim 10^{-6} \text{ m}^2/\text{s}$.<br>
+            Let's calculate the Ekman Depth:</p>
+            <div class="math-display">
+            $$D_{molecular} = \sqrt{\frac{2(10^{-6})}{10^{-4}}} = \sqrt{0.02} \approx 0.14 \text{ meters}$$
+            </div>
+            <p><em>Physical Check:</em> If the ocean relied purely on molecular viscosity, the entire wind-driven spiral would happen within the top 14 centimeters of the ocean! This is clearly wrong.</p>
+
+            <p><strong>Scenario B: A Turbulent Ocean (Eddy Viscosity)</strong><br>
+            Thanks to wave breaking and turbulent eddies, momentum is mixed rapidly downward. A typical value for the vertical eddy viscosity in the mixed layer is $K_z \sim 0.1 \text{ m}^2/\text{s}$.</p>
+            <div class="math-display">
+            $$D_{eddy} = \sqrt{\frac{2(0.1)}{10^{-4}}} = \sqrt{2000} \approx 45 \text{ meters}$$
+            </div>
+            <p><em>Physical Check:</em> This perfectly matches observations. The wind-driven Ekman layer extends about 40 to 50 meters deep.<br>
+            Furthermore, because $K_z$ is not actually perfectly constant in reality (it decreases near the very surface), the theoretical $45^\circ$ angle is generally observed to be closer to Nansen's observed $20^\circ-40^\circ$.</p>
+
+            <h2>6. Summary</h2>
+            <ul>
+                <li><strong>Non-Dimensional Scaling:</strong> By comparing advection to the Coriolis force directly ($Ro \ll 1$) and local acceleration to the Coriolis force over long timescales ($\frac{1}{fT} \ll 1$), we linearize the equations and assume a steady state without contradictions.</li>
+                <li><strong>The Ekman Balance:</strong> This isolates a pure physical balance between the Coriolis force and vertical turbulent friction ($K_z$). The regime where they balance naturally defines the Ekman depth scale $H \sim \sqrt{K_z/f}$.</li>
+                <li><strong>The Solution:</strong> The analytical solution to this balance yields the <strong>Ekman Spiral</strong>, where surface currents flow $45^\circ$ to the right of the wind, rotating further right and decaying exponentially with depth.</li>
+                <li><strong>Turbulence vs Molecules:</strong> Plugging in typical values shows that molecular viscosity ($\nu$) would confine wind influence to the top 14 cm, proving that large-scale eddy viscosity ($K_z$) is physically responsible for pushing wind energy 40-50 meters deep.</li>
+            </ul>
+
+            <hr class="my-16 border-t-2 border-gray-200">
+
+            <!-- LECTURE 2: EKMAN PUMPING -->
+            <h1>Lecture: Ekman Transport and Pumping - Connecting the Surface to the Deep</h1>
+
+            <h2>1. Introduction: Why Do We Care About a 50-Meter Layer?</h2>
+            <p>In our previous lecture, we derived the beautiful mathematics of the Ekman spiral. We found that wind energy, mediated by turbulent eddy viscosity, penetrates roughly 40 to 50 meters into the ocean.</p>
+            <p>However, a fundamental heuristic question arises: the global ocean has an average depth of about 4,000 meters. Why should oceanographers care so deeply about a thin, 50-meter boundary layer at the very top? Does this thin skin of wind-driven water actually influence the massive, deep ocean interior?</p>
+            <p>The answer is a resounding yes, and the mechanism is <strong>vertical velocity</strong>.</p>
+            <p>If the wind blows uniformly everywhere, the Ekman layer simply slides over the deep ocean. But in the real world, winds are highly variable (e.g., Westerlies in the mid-latitudes, Trade Winds near the equator). If the wind pushes more water into a region than it takes out, the water must go somewhere. Because the ocean surface acts essentially as a rigid lid (it cannot pile up infinitely), the water is forced downward into the deep ocean. Conversely, if wind pulls water away from a region, deep water must rise to replace it.</p>
+            <p>This wind-driven vertical velocity—connecting the surface boundary layer to the vast abyssal ocean—is called <strong>Ekman Pumping</strong> (downwelling) or <strong>Ekman Suction</strong> (upwelling). To calculate it, we must step back from the highly detailed, vertically-resolved spiral, and instead look at the <em>bulk</em> behavior of the entire mixed layer.</p>
+
+            <h2>2. Integrating the Ekman Layer: The Power of the Stress Formulation</h2>
+            <p>In our previous lecture on the Ekman spiral, we made a significant assumption to close the equations: we parameterized complex turbulent eddies as a macroscopic form of diffusion using a constant eddy viscosity $K_z$ (Gradient Transport Theory). While this allowed us to solve for the exact, spiraling shape of the velocity profile, real ocean turbulence is incredibly messy and doesn't always behave like simple, uniform diffusion.</p>
+            <p>The beauty of deriving the <em>bulk</em> Ekman transport is that <strong>we do not need to make this assumption!</strong> We can drop the concept of eddy diffusion entirely and go back to the fundamental representation of turbulent friction: the vertical divergence of kinematic shear stress ($\tau$).</p>
+            <p>Let us return to the steady-state, linearized momentum equations ($Ro \ll 1$ and $1/(fT) \ll 1$), leaving the turbulent friction in its exact, generalized form:</p>
+            
+            <div class="math-display">
+            $$-f v = \frac{1}{\rho} \frac{\partial \tau_x}{\partial z}$$
+            </div>
+            <div class="math-display">
+            $$f u = \frac{1}{\rho} \frac{\partial \tau_y}{\partial z}$$
+            </div>
+            
+            <p>Here, $\tau_x$ and $\tau_y$ represent the internal turbulent shear stresses acting on a horizontal plane within the fluid.</p>
+
+            <p><strong>The Integral Approach:</strong><br>
+            To understand the "bulk" behavior, let us multiply these equations by density ($\rho$) to express them as a momentum balance, and integrate them from the bottom of the Ekman layer ($z = -H_E$, where wind influence vanishes) up to the surface ($z = 0$).</p>
+            <p>Let's look at the $x$-momentum equation:</p>
+            <div class="math-display">
+            $$\int_{-H_E}^{0} -f \rho v \, dz = \int_{-H_E}^{0} \frac{\partial \tau_x}{\partial z} \, dz$$
+            </div>
+            <p>On the left side, $-f$ is a constant, so we can pull it out. The integral of $\rho v$ over the depth is exactly the <strong>total meridional mass transport</strong>, which we call $M_y$ (units of kg m$^{-1}$ s$^{-1}$).</p>
+            <div class="math-display">
+            $$-f M_y = \int_{-H_E}^{0} \frac{\partial \tau_x}{\partial z} \, dz$$
+            </div>
+
+            <p><strong>The Fundamental Theorem of Calculus:</strong><br>
+            Now look at the right side. By the Fundamental Theorem of Calculus, the integral of a spatial derivative is simply the function evaluated at its boundaries:</p>
+            <div class="math-display">
+            $$\int_{-H_E}^{0} \frac{\partial \tau_x}{\partial z} \, dz = \tau_x(0) - \tau_x(-H_E)$$
+            </div>
+            <p>This is a profoundly elegant mathematical simplification. It proves that to find the total mass transported by the wind, we do not need to know <em>anything</em> about the internal mechanics of the turbulence—we don't need $K_z$, and we don't need to know the shape of the spiral. We only need to know the physics at the two boundaries!</p>
+            <ol>
+                <li><strong>At the surface ($z = 0$):</strong> The internal shear stress of the water must exactly match the external stress applied by the wind. Therefore, $\tau_x(0) = \tau_{wind, x}$.</li>
+                <li><strong>At the bottom of the layer ($z = -H_E$):</strong> By definition, this is the depth where the wind's influence has died out. The fluid is no longer being sheared by wind-driven turbulence. Therefore, the internal stress drops to zero: $\tau_x(-H_E) = 0$.</li>
+            </ol>
+            <p>Substituting these boundary conditions back into our integrated equations, we are left with:</p>
+            <div class="math-display">
+            $$-f M_y = \tau_{wind, x} \implies M_y = -\frac{\tau_{wind, x}}{f}$$
+            </div>
+            <div class="math-display">
+            $$f M_x = \tau_{wind, y} \implies M_x = \frac{\tau_{wind, y}}{f}$$
+            </div>
+            <p><em>Physical Meaning:</em> The total bulk transport of the Ekman layer depends <strong>only</strong> on the surface wind stress and the Coriolis parameter. It is a robust, universal result that requires absolutely no parameterization of turbulence. Furthermore, the math proves that a wind stress in the $x$-direction ($\tau_x$) drives a mass transport perfectly in the negative $y$-direction ($-M_y$). <strong>The net transport is exactly 90 degrees to the right of the wind in the Northern Hemisphere.</strong></p>
+
+            <h2>3. The Origin of Vertical Velocity: Mass Continuity</h2>
+            <p>Now we know how much water the wind is dragging laterally. But how does this create vertical velocity ($w$)? We find the answer in the conservation of mass.</p>
+            <p>For an incompressible fluid like seawater, the 3D continuity equation is:</p>
+            <div class="math-display">
+            $$\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0$$
+            </div>
+            <p>Let's integrate this continuity equation over the entire Ekman layer, from $z = -H_E$ to $z = 0$:</p>
+            <div class="math-display">
+            $$\int_{-H_E}^{0} \left( \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} \right) dz + \int_{-H_E}^{0} \frac{\partial w}{\partial z} dz = 0$$
+            </div>
+            <p>Assuming density $\rho$ is roughly constant in this mixed layer, the first integral is simply the horizontal divergence of our bulk mass transports, divided by density:</p>
+            <div class="math-display">
+            $$\frac{1}{\rho} \left( \frac{\partial M_x}{\partial x} + \frac{\partial M_y}{\partial y} \right) + \Big[ w(0) - w(-H_E) \Big] = 0$$
+            </div>
+
+            <p><strong>Boundary Conditions for Vertical Velocity:</strong></p>
+            <ol>
+                <li><strong>At the surface ($z = 0$):</strong> The ocean surface is essentially a rigid lid for large-scale, steady motions (ignoring tiny variations from waves and evaporation). Water cannot flow vertically out of the ocean into the atmosphere. Thus, $w(0) \approx 0$.</li>
+                <li><strong>At the bottom ($z = -H_E$):</strong> This is the vertical velocity forced into the deep ocean interior. Let's call this <strong>Ekman velocity</strong>, $w_{Ek}$.</li>
+            </ol>
+            <p>Substituting these boundary conditions, we get:</p>
+            <div class="math-display">
+            $$\frac{1}{\rho} \left( \frac{\partial M_x}{\partial x} + \frac{\partial M_y}{\partial y} \right) - w_{Ek} = 0$$
+            </div>
+            <div class="math-display">
+            $$w_{Ek} = \frac{1}{\rho} \left( \frac{\partial M_x}{\partial x} + \frac{\partial M_y}{\partial y} \right) = \frac{1}{\rho} \nabla_h \cdot \mathbf{M}$$
+            </div>
+            <p><em>Physical Meaning:</em> The vertical velocity at the base of the Ekman layer is directly equal to the horizontal divergence of the Ekman mass transport. If the transport converges ($\nabla_h \cdot \mathbf{M} < 0$), water is pushed down ($w_{Ek} < 0$). If it diverges, deep water is sucked up.</p>
+
+            <h2>4. Connecting Wind to Deep Ocean Velocity</h2>
+            <p>Finally, let us substitute our wind-stress expressions for $M_x$ and $M_y$ into our vertical velocity equation.</p>
+            <p>Recall: $M_x = \frac{\tau_y}{f}$ and $M_y = -\frac{\tau_x}{f}$.</p>
+            <div class="math-display">
+            $$w_{Ek} = \frac{1}{\rho} \left[ \frac{\partial}{\partial x} \left( \frac{\tau_y}{f} \right) + \frac{\partial}{\partial y} \left( -\frac{\tau_x}{f} \right) \right]$$
+            </div>
+            <p>If we assume we are looking at a region where $f$ is relatively constant (the $f$-plane approximation), we can pull $f$ out of the derivatives:</p>
+            <div class="math-display">
+            $$w_{Ek} = \frac{1}{\rho f} \left( \frac{\partial \tau_y}{\partial x} - \frac{\partial \tau_x}{\partial y} \right)$$
+            </div>
+            <p>The term in the parentheses is exactly the vertical component of the <strong>curl of the wind stress</strong> vector ($\nabla \times \boldsymbol{\tau} \cdot \mathbf{\hat{k}}$).</p>
+            <p>Therefore, the master equation for Ekman pumping is:</p>
+            <div class="math-display">
+            $$w_{Ek} = \frac{1}{\rho f} \text{curl}(\boldsymbol{\tau})$$
+            </div>
+
+            <h2>5. Summary and Heuristic Physical Picture</h2>
+            <ul>
+                <li><strong>The Power of the Stress Formulation:</strong> By integrating the boundary layer equations directly from the exact shear stress formulation, we completely bypass the need to treat turbulence as diffusion. The Fundamental Theorem of Calculus causes the internal shear terms to evaluate strictly at the boundaries, leaving the bulk transport entirely dependent on the surface wind stress.</li>
+                <li><strong>Bulk Transport:</strong> The net mass transport of the Ekman layer ($\mathbf{M}$) is determined purely by wind stress and the Coriolis parameter, moving exactly $90^\circ$ to the right of the wind in the Northern Hemisphere.</li>
+                <li><strong>Continuity drives Vertical Flow:</strong> Because the ocean surface is a rigid lid, horizontal convergence or divergence of this Ekman transport physically forces water downward or pulls it upward.</li>
+                <li><strong>Wind Stress Curl:</strong> Ultimately, the vertical velocity injected into the deep ocean ($w_{Ek}$) is not proportional to the <em>strength</em> of the wind, but to the <em>curl</em> (the rotational shear) of the wind stress.
+                    <ul>
+                        <li><strong>Cyclonic winds</strong> (Low pressure, counter-clockwise in NH) have a positive curl. This drives divergent Ekman transport outward, sucking deep water <em>up</em> (Ekman Suction, $w_{Ek} > 0$).</li>
+                        <li><strong>Anticyclonic winds</strong> (High pressure, clockwise in NH) have a negative curl. This drives convergent Ekman transport inward, pumping surface water <em>down</em> (Ekman Pumping, $w_{Ek} < 0$).</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>This tiny vertical velocity—often just meters per year—is the fundamental mechanical linkage between the atmosphere and the deep ocean. As we will see later, this slow stretching and squashing of deep fluid columns is the primary driver of the globe's massive ocean gyres.</p>
+
+        </article>
+    </div>
+
+</body>
+</html>
