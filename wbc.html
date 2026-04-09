@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture: Western Boundary Currents</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { academic: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' } },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: '#334155',
+                                h1: { color: '#0f172a', fontWeight: '700', fontFamily: '"Inter", sans-serif' },
+                                h2: { color: '#0f172a', fontWeight: '700', fontSize: '1.875em', borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', marginTop: '3rem', marginBottom: '1.5rem', fontFamily: '"Inter", sans-serif' },
+                                h3: { color: '#1e293b', fontWeight: '600', fontSize: '1.5em', marginTop: '2.5rem', marginBottom: '1rem', fontFamily: '"Inter", sans-serif' },
+                                p: { lineHeight: '1.8', marginTop: '1.25em', marginBottom: '1.25em' },
+                                a: { color: '#2563eb', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
+                                ul: { marginTop: '1em', marginBottom: '1em' },
+                                li: { marginTop: '0.5em', marginBottom: '0.5em' }
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #f8fafc; }
+        .reference-box { background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1.5rem; margin: 2.5rem 0; border-radius: 0 0.5rem 0.5rem 0; font-family: 'Inter', system-ui, sans-serif; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .reference-title { font-weight: 700; color: #1e3a8a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+        .math-block { overflow-x: auto; margin: 2rem 0; padding: 1rem 0; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="max-w-4xl mx-auto px-10 py-16 bg-white shadow-sm my-10 rounded-xl border border-gray-200">
+        
+        <header class="mb-14">
+            <h1 class="text-4xl font-bold text-academic-900 mb-4 tracking-tight" style="font-family: 'Inter', sans-serif;">Lecture: Western Boundary Currents</h1>
+            <p class="text-xl text-gray-600 font-light border-b pb-8" style="font-family: 'Inter', sans-serif;">The Vorticity Budget and the Closure of Ocean Circulation</p>
+        </header>
+
+        <main class="prose prose-lg max-w-none">
+            <p>Our prior analyses established two foundational mechanisms governing the ocean interior. First, <strong>Sverdrup theory</strong> dictates that the curl of the wind stress drives a broad, slow equatorward transport in the deep, frictionless interior. Second, the <strong>Conservation of Potential Vorticity (PV)</strong> requires that fluid parcels altering their meridional position on a spherical Earth must adjust their relative vorticity to account for changes in planetary rotation (the $\beta$-effect).</p>
+            
+            <p>However, Sverdrup flow only models the interior transport. The ocean consists of closed basins. If the interior of a subtropical gyre flows steadily southward, mass conservation necessitates a continuous northward return flow. Determining the spatial location and dynamic structure of this return flow requires evaluating the basin-wide vorticity budget.</p>
+
+            <h2>1. The Basin-Wide Vorticity Imbalance</h2>
+            
+            <p>In a subtropical gyre, the atmospheric wind field—characterized by Westerlies at higher latitudes and Trade Winds near the equator—exerts a continuous, clockwise torque on the ocean. Mathematically, this wind stress curl systematically injects <strong>negative (anticyclonic)</strong> relative vorticity into the basin.</p>
+
+            <p>In the steady-state, frictionless interior, the ocean responds by advecting mass equatorward. By shifting to a lower latitude, the fluid parcels decrease their planetary vorticity ($f$). This spatial shift absorbs the negative vorticity introduced by the wind, preserving the potential vorticity balance without the fluid requiring large relative vorticity ($\zeta$). This is the dynamic mechanism of Sverdrup flow ($\beta v \approx \text{Wind Curl}$).</p>
+
+            <p>However, mass conservation requires this southward-flowing mass to return northward. This return flow generates a fundamental dynamic imbalance:</p>
+            <ul>
+                <li>The wind stress continually adds negative vorticity to the basin.</li>
+                <li>As the return current flows poleward to higher latitudes (increasing $f$), PV conservation dictates that the fluid must acquire <em>additional</em> negative relative vorticity to compensate for the higher planetary rotation rate.</li>
+            </ul>
+            <p>For the ocean circulation to maintain a steady state, an external mechanism must provide a significant source of <strong>positive (cyclonic)</strong> vorticity to balance this budget.</p>
+
+            <h2>2. Friction as the Vorticity Sink</h2>
+
+            <p>Within the deep interior, the fluid is effectively frictionless. The primary physical process capable of injecting positive vorticity into the circulation is <strong>lateral friction</strong> along a continental boundary.</p>
+
+            <p>As a current flows adjacent to a continental shelf, the solid boundary exerts a drag force opposing the flow. According to the no-slip condition, fluid velocity is zero at the physical wall and increases offshore, generating a strong lateral velocity shear ($\frac{\partial v}{\partial x}$). This shear acts as a rotational torque, modifying the relative vorticity of the fluid.</p>
+            
+            <p>To successfully close the overall vorticity budget, the northward return current must be positioned on the specific side of the ocean basin where this lateral frictional torque yields positive vorticity.</p>
+
+            <h2>3. Evaluating the Eastern Boundary</h2>
+
+            <p>Let us hypothesize a northward return current ($v > 0$) established along the <strong>Eastern boundary</strong> of a basin (e.g., along the coast of Europe/Africa).</p>
+            
+            <p>In this configuration, the physical boundary lies to the east, and the open ocean interior lies to the west. A northward boundary current will experience maximum southward frictional drag at the eastern wall. Moving westward from the coast into the interior (decreasing $x$), the northward velocity $v$ increases from zero. Consequently, the velocity shear $\frac{\partial v}{\partial x}$ is positive.</p>
+            
+            <p>A positive lateral shear on a northward current imparts a clockwise spin, representing negative relative vorticity.</p>
+
+            <p><strong>The Dynamic Consequence:</strong> An eastern boundary current injects further <em>negative</em> vorticity into the ocean. This process exacerbates the vorticity imbalance. The wind, the planetary $\beta$-effect on the return flow, and the eastern boundary friction would all act as sources of negative vorticity. Under these conditions, a steady state is impossible; therefore, dynamic constraints preclude the formation of an intense eastern return current.</p>
+
+            <h2>4. The Western Boundary Solution</h2>
+
+            <p>Conversely, let us evaluate a northward return current positioned along the <strong>Western boundary</strong> (e.g., the East Coast of North America).</p>
+
+            <p>Here, the physical boundary lies to the west, and the open ocean interior lies to the east. Moving eastward away from the coastal wall into the interior (increasing $x$), the northward velocity $v$ rapidly increases from zero to a maximum before decaying into the interior flow. In the highly frictional zone adjacent to the wall, the shear $\frac{\partial v}{\partial x}$ is strongly positive.</p>
+            
+            <p>The frictional drag, acting on the western margin of the northward flow, exerts a torque that spins the fluid counter-clockwise.</p>
+
+            <p><strong>The Dynamic Consequence:</strong> Friction along the western boundary injects <strong>positive (cyclonic)</strong> vorticity into the ocean. This frictional torque provides the exact mathematical sink necessary to perfectly balance the negative vorticity accumulated from the wind stress and the planetary $\beta$-effect across the entire basin.</p>
+
+            <h2>5. Western Intensification</h2>
+
+            <p>While the required return flow must exist on the western boundary, we must also explain its geometric concentration—the phenomenon of <strong>Western Intensification</strong>.</p>
+
+            <p>The atmospheric wind stress applies a relatively low-magnitude torque distributed over a massive spatial area (ocean basins spanning thousands of kilometers). The total vorticity injected is the spatial integral of this forcing over the entire basin.</p>
+
+            <p>The western boundary must inject an equivalent total magnitude of positive vorticity to balance the equation. However, significant boundary friction is confined to a narrow coastal strip, typically operating over spatial scales of $100$ kilometers or less.</p>
+
+            <p>Because the vorticity source generated by friction is strictly dependent on the lateral velocity shear ($-r\frac{\partial v}{\partial x}$), generating basin-scale vorticity over a highly localized distance requires an exceptionally steep velocity gradient. The fluid must accelerate from zero velocity at the coastline to maximum northward velocities over a very short transverse distance. Consequently, conservation of potential vorticity mathematically dictates that the western boundary current must be intense and highly concentrated, manifesting physically as major currents like the Gulf Stream and the Kuroshio.</p>
+
+            <div class="reference-box">
+                <div class="reference-title">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Reading Reference: Stewart
+                </div>
+                <p class="text-blue-900 mb-0 text-base">To review the formal mathematical model demonstrating this behavior, refer to <strong>Chapter 11: Wind Driven Ocean Circulation</strong>, specifically <strong>Section 11.2 (Stommel's Theory of Western Boundary Currents)</strong> in Stewart's text.</p>
+            </div>
+
+            <h2>6. Stommel's Model: The Mathematics of Symmetry Breaking</h2>
+
+            <p>Henry Stommel formalized this physical argument in 1948 by analyzing a simplified mathematical model. He evaluated a rectangular ocean basin subjected to a symmetrical wind stress, and parameterized the vorticity sink using a linear bottom friction proportional to velocity ($-ru$, $-rv$).</p>
+
+            <p>By taking the curl of the steady-state momentum equations, Stommel derived the vertically integrated vorticity equation. Expressed via a streamfunction ($\psi$), where $u = -\frac{\partial \psi}{\partial y}$ and $v = \frac{\partial \psi}{\partial x}$, the governing differential equation is:</p>
+
+            <div class="math-block">
+                $$r \nabla^2 \psi + \beta \frac{\partial \psi}{\partial x} = \text{Curl}_z(\boldsymbol{\tau})$$
+            </div>
+
+            <p>Here, the terms represent the frictional dissipation of vorticity, the advection of planetary vorticity (the $\beta$-effect), and the external wind forcing, respectively. This equation explicitly demonstrates how planetary curvature breaks the spatial symmetry of the circulation.</p>
+
+            <h3>6.1 The $f$-plane: Symmetric Circulation</h3>
+
+            <p>Assuming a uniform rotation rate ($f$-plane, $\beta = 0$), the planetary advection term vanishes:</p>
+            <div class="math-block">
+                $$r \nabla^2 \psi = \text{Curl}_z(\boldsymbol{\tau})$$
+            </div>
+            
+            <p>This is a standard Poisson equation. The Laplacian operator ($\nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}$) is an <strong>even</strong> differential operator. This can be verified via a coordinate transformation reversing the east-west axis ($x' = -x$). Applying the chain rule twice yields $\frac{\partial^2}{\partial x^2} = \left(-\frac{\partial}{\partial x'}\right) \left(-\frac{\partial}{\partial x'}\right) = \frac{\partial^2}{\partial x'^2}$. The negative signs cancel, indicating the operator acts symmetrically regardless of direction.</p>
+
+            <p>Consequently, symmetrical wind forcing produces a perfectly symmetric streamfunction solution. The resulting flow exhibits broad, gentle flows along both the eastern and western boundaries. Without the $\beta$ term, the dynamic system lacks a mechanism to differentiate the eastern and western domains.</p>
+
+            <h3>6.2 The $\beta$-plane: Symmetry Breaking</h3>
+
+            <p>Restoring the $\beta$-effect reintroduces the planetary advection term ($\beta \frac{\partial \psi}{\partial x}$). This term incorporates a first-order derivative, which is an <strong>odd</strong> operator. In the study of differential equations, appending an odd-order derivative to an even-order spatial operator explicitly breaks the spatial symmetry of the solution along that specific axis.</p>
+
+            <p>Because the $\beta$ term differentiates solely with respect to longitude ($x$), it forces an east-west asymmetry, skewing the streamlines toward one side of the domain.</p>
+
+            <h3>6.3 The Necessity of a Western Boundary Layer</h3>
+
+            <p>To mathematically determine the location of the resulting boundary layer, we analyze the homogeneous component of Stommel's equation in the zonal direction:</p>
+            <div class="math-block">
+                $$r \frac{d^2 \psi}{dx^2} + \beta \frac{d\psi}{dx} = 0$$
+            </div>
+
+            <p>Assuming a solution of the form $\psi \propto e^{\lambda x}$ yields the characteristic equation $r \lambda^2 + \beta \lambda = 0$. The roots are $\lambda_1 = 0$ and $\lambda_2 = -\frac{\beta}{r}$.</p>
+
+            <p>Because both $\beta$ and the friction coefficient $r$ are strictly positive physical constants, the non-zero root ($\lambda_2$) is intrinsically <strong>negative</strong>. This yields a boundary layer solution:</p>
+            <div class="math-block">
+                $$\psi \propto e^{-\left(\frac{\beta}{r}\right)x}$$
+            </div>
+
+            <p>For a boundary layer to be physically valid, the solution must decay exponentially from the boundary into the ocean interior.</p>
+            
+            <ul>
+                <li><strong>At the Western Boundary ($x=0$):</strong> Moving eastward into the interior implies $x$ increases positively. The exponent $-\left(\frac{\beta}{r}\right)x$ becomes increasingly negative, allowing the function to decay steadily. The boundary layer is mathematically stable.</li>
+                <li><strong>At the Eastern Boundary ($x=L$):</strong> Moving westward into the interior implies $x$ decreases. A decreasing $x$ applied to a negative root forces the exponential term to grow unbounded, violating the definition of a boundary layer. A stable eastern boundary layer would necessitate a positive characteristic root, which the physics of the system do not supply.</li>
+            </ul>
+
+            <p>Through this linear framework, Stommel definitively established that fluid dynamics on a rotating sphere permit a stable boundary layer exclusively on the western wall, leading directly to the phenomenon of western intensification.</p>
+
+        </main>
+    </div>
+</body>
+</html>
