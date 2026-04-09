@@ -15,3 +15,8 @@ view them as and when they are uploaded.
 * Note 4: [Thermodynamics](./ocean_thermo.html)
 * Note 4: [Non-dimensionalization and Scaling](./nondim_scaling.html)
 * Note 5: [The mixed layer and inertial oscillations](./inertial_mixed.html)
+* Note 6: [Ekman Layer and transport](./ekman.html)
+* Note 7: [Sverdrup transport](./sverdrup.html)
+* Note 8: [Geostrophy](./geostrophy.html)
+* Note 9: [Western boundary currents](./wbc.html)
+* Note 10: [Summary](./summary.html)
