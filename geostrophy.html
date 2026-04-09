@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture: Geostrophic Balance</title>
+    <!-- Google Fonts for academic typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS with typography plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        academic: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' }
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: '#334155',
+                                h1: { color: '#0f172a', fontWeight: '700', fontFamily: '"Inter", sans-serif' },
+                                h2: { color: '#0f172a', fontWeight: '700', fontSize: '1.875em', borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', marginTop: '3rem', marginBottom: '1.5rem', fontFamily: '"Inter", sans-serif' },
+                                h3: { color: '#1e293b', fontWeight: '600', fontSize: '1.5em', marginTop: '2.5rem', marginBottom: '1rem', fontFamily: '"Inter", sans-serif' },
+                                p: { lineHeight: '1.8', marginTop: '1.25em', marginBottom: '1.25em' },
+                                a: { color: '#2563eb', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
+                                ul: { marginTop: '1em', marginBottom: '1em' },
+                                li: { marginTop: '0.5em', marginBottom: '0.5em' }
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- MathJax for rendering LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                tags: 'ams'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #f8fafc; }
+        .reference-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 2.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .reference-title { font-weight: 700; color: #1e3a8a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; }
+        .math-block { overflow-x: auto; margin: 2rem 0; padding: 1rem 0; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="max-w-4xl mx-auto px-10 py-16 bg-white shadow-sm my-10 rounded-xl border border-gray-200">
+        
+        <header class="mb-14">
+            <h1 class="text-4xl font-bold text-academic-900 mb-4 tracking-tight" style="font-family: 'Inter', sans-serif;">Lecture: Geostrophic Balance</h1>
+            <p class="text-xl text-gray-600 font-light border-b pb-8" style="font-family: 'Inter', sans-serif;">The Flow Dynamics of the Deep Ocean Interior</p>
+        </header>
+
+        <main class="prose prose-lg max-w-none">
+            <h2>1. The Vertical Journey of Momentum: A Hierarchy of Balances</h2>
+            
+            <p>To understand the dynamics of the vast ocean interior, it is necessary to trace the path of momentum as it enters from the atmosphere and observe how the governing physical balances shift with depth.</p>
+
+            <p>We begin with the horizontal momentum equations on a rotating Earth (using the $f$-plane approximation for localized regions):</p>
+
+            <div class="math-block">
+                $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} - fv = -\frac{1}{\rho} \frac{\partial P}{\partial x} + \frac{1}{\rho} \frac{\partial \tau_x}{\partial z}$$
+                $$\frac{\partial v}{\partial t} + u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} + fu = -\frac{1}{\rho} \frac{\partial P}{\partial y} + \frac{1}{\rho} \frac{\partial \tau_y}{\partial z}$$
+            </div>
+
+            <p>As depth increases, the dominant terms in these equations transition across distinct regimes:</p>
+
+            <ul>
+                <li><strong>The Mixed Layer Boundary:</strong> At the air-sea interface, wind stress provides kinetic energy. Non-linear turbulent cascades redistribute this energy, driving continuous vertical mixing. The dominant balance here is between atmospheric forcing and turbulent diffusion: $\boldsymbol{\tau}_{wind} \approx \rho K_z \frac{\partial \mathbf{u}}{\partial z}$.</li>
+                <li><strong>The Ekman Layer (Upper ~50m):</strong> As momentum diffuses deeper, the Coriolis force asserts a measurable influence. This layer represents a steady-state balance between vertical turbulent shear stress and the Coriolis force, with horizontal pressure gradients playing a negligible role.</li>
+                <li><strong>The Deep Interior:</strong> Below the Ekman depth, wind-driven turbulent friction dissipates ($\frac{\partial \tau}{\partial z} \approx 0$). However, because spatial scales remain large and velocities are slow, the Coriolis force remains highly active. If friction is negligible, the Coriolis force must be balanced entirely by <strong>Pressure Gradients</strong>.</li>
+            </ul>
+
+            <h2>2. Regime Identification: Scaling the Interior</h2>
+
+            <p>We formally isolate the physics of the deep interior through dimensional scaling and non-dimensional numbers.</p>
+
+            <p><strong>The Rossby Number ($Ro$):</strong><br>
+            In the open ocean, currents are slow ($U \sim 0.05$ m/s) and coherent over vast distances ($L \sim 100$ km). The ratio of advective forces to the Coriolis force is small:</p>
+            <div class="math-block">
+                $$Ro = \frac{U}{fL} \ll 1$$
+            </div>
+            <p>This scaling formally justifies linearization. The non-linear advective terms ($u \frac{\partial u}{\partial x}$, etc.) can be omitted from the primary balance.</p>
+
+            <p><strong>The Temporal Scale:</strong><br>
+            Large-scale interior flows evolve over extended periods (months to years), meaning the timescale $T \gg 1/f$. This permits the steady-state assumption, allowing us to neglect local acceleration ($\frac{\partial \mathbf{u}}{\partial t}$).</p>
+
+            <p><strong>The Ekman Number ($Ek$):</strong><br>
+            Far below the surface boundary layer and well above the benthic boundary layer, turbulent friction is negligible:</p>
+            <div class="math-block">
+                $$Ek = \frac{K_z}{f H^2} \ll 1$$
+            </div>
+            <p>This allows the omission of vertical diffusion terms.</p>
+
+            <p><strong>The Resulting Balance:</strong><br>
+            Stripping away advection, local acceleration, and friction reduces the Navier-Stokes equations to a linear, steady-state balance between the Coriolis force and the pressure gradient force:</p>
+
+            <div class="math-block">
+                $$-fv = -\frac{1}{\rho} \frac{\partial P}{\partial x} \quad \text{and} \quad fu = -\frac{1}{\rho} \frac{\partial P}{\partial y}$$
+            </div>
+            <p>This is the fundamental <strong>Geostrophic Balance</strong>.</p>
+
+            <h2>3. The Physics of Geostrophy</h2>
+
+            <p>Rearranging the balance equations to solve for the horizontal velocities yields the <strong>Geostrophic Equations</strong>:</p>
+
+            <div class="math-block">
+                $$u_g = -\frac{1}{\rho f} \frac{\partial P}{\partial y} \quad \text{and} \quad v_g = \frac{1}{\rho f} \frac{\partial P}{\partial x}$$
+            </div>
+
+            <p>In a non-rotating reference frame, fluid flows down the pressure gradient (from high to low pressure). However, on a rotating Earth, the Coriolis force deflects fluid parcels perpendicular to their motion. The fluid turns until the Coriolis force exactly opposes the pressure gradient. In this state, the flow is strictly perpendicular to the pressure gradient, flowing along lines of constant pressure (isobars).</p>
+
+            <h2>4. Sources of Oceanic Pressure Gradients</h2>
+
+            <p>Pressure gradients in the interior ocean originate from two primary sources:</p>
+
+            <h3>4.1. Barotropic Pressure Gradients</h3>
+            <p>Wind-stress curl drives convergent Ekman transport, accumulating mass and locally elevating the sea surface height ($\eta$). This sloping sea surface introduces a horizontal pressure gradient that extends uniformly through the entire barotropic water column.</p>
+
+            <h3>4.2. Baroclinic Pressure Gradients</h3>
+            <p>The ocean is highly stratified by temperature and salinity. Horizontal variations in density ($\rho$) generate internal horizontal pressure gradients that vary with depth, even beneath a flat sea surface. These variations drive baroclinic flows.</p>
+
+            <h2>5. Observational Methodology: The Thermal Wind Equations</h2>
+
+            <p>Measuring the absolute velocity of slow, deep ocean currents directly is technically challenging and subject to significant noise. However, the geostrophic equations establish that mapping the ocean's pressure field directly determines its velocity field. We derive the <strong>Thermal Wind Equations</strong> to link easily measured density variations directly to geostrophic currents.</p>
+
+            <div class="reference-box">
+                <div class="reference-title">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Reading Reference: Stewart
+                </div>
+                <p class="text-blue-900 mb-0 text-base">The following coordinate transformation and dynamic method follow the formal framework presented in Robert Stewart's <em>Introduction to Physical Oceanography</em>. Refer to <strong>Chapter 10: Geostrophic Currents</strong>, particularly Sections 10.1 (The Equations of Geostrophic Flow) and 10.2 (Computation of Geostrophic Currents).</p>
+            </div>
+
+            <h3>5.1 Deriving Thermal Wind in Depth Coordinates</h3>
+
+            <p>Taking the vertical derivative ($\frac{\partial}{\partial z}$) of the geostrophic balance equations gives:</p>
+            <div class="math-block">
+                $$f \frac{\partial u}{\partial z} = -\frac{1}{\rho_0} \frac{\partial}{\partial y} \left( \frac{\partial P}{\partial z} \right) \quad \text{and} \quad f \frac{\partial v}{\partial z} = \frac{1}{\rho_0} \frac{\partial}{\partial x} \left( \frac{\partial P}{\partial z} \right)$$
+            </div>
+
+            <p>Applying the hydrostatic equation ($\frac{\partial P}{\partial z} = -\rho g$) and substituting it for the vertical pressure gradient yields the Thermal Wind equations:</p>
+
+            <div class="math-block">
+                $$f \frac{\partial u}{\partial z} = \frac{g}{\rho_0} \frac{\partial \rho}{\partial y} \quad \text{and} \quad f \frac{\partial v}{\partial z} = -\frac{g}{\rho_0} \frac{\partial \rho}{\partial x}$$
+            </div>
+            <p>These equations state that the vertical shear of geostrophic velocity is strictly proportional to the horizontal density gradient.</p>
+
+            <h3>5.2 Coordinate Transformation and the Dynamic Method</h3>
+
+            <p>Oceanographic instruments (like CTDs) measure pressure accurately, not geometric depth. Therefore, analyzing observational data requires transforming our equations from geometric depth ($z$) coordinates to pressure ($p$) coordinates.</p>
+
+            <p>Applying the multivariable chain rule to evaluate the horizontal gradient of geometric height ($z$) on a surface of constant depth ($z$):</p>
+            <div class="math-block">
+                $$0 = \left( \frac{\partial z}{\partial x} \right)_p + \frac{\partial z}{\partial p} \left( \frac{\partial p}{\partial x} \right)_z$$
+            </div>
+
+            <p>Isolating the horizontal pressure gradient term $\left( \frac{\partial p}{\partial x} \right)_z$ and substituting the hydrostatic approximation ($\frac{\partial p}{\partial z} = -\rho g$):</p>
+            <div class="math-block">
+                $$\left( \frac{\partial p}{\partial x} \right)_z = \rho g \left( \frac{\partial z}{\partial x} \right)_p$$
+            </div>
+
+            <p>We define <strong>geopotential</strong> ($\Phi$) as $\Phi = gz$. Substituting $\Phi$ into the equation achieves a formal transformation:</p>
+            <div class="math-block">
+                $$\frac{1}{\rho} \left( \frac{\partial p}{\partial x} \right)_z = \left( \frac{\partial \Phi}{\partial x} \right)_p$$
+            </div>
+
+            <p>The horizontal pressure gradient evaluated at a constant depth is mathematically equivalent to the gradient of geopotential evaluated on a constant pressure surface. The geostrophic equations in pressure coordinates become:</p>
+            <div class="math-block">
+                $$v = \frac{1}{f} \left(\frac{\partial \Phi}{\partial x}\right)_p \quad \text{and} \quad u = -\frac{1}{f} \left(\frac{\partial \Phi}{\partial y}\right)_p$$
+            </div>
+
+            <p>To integrate these equations operationally, oceanographers calculate the <strong>specific volume anomaly</strong> ($\delta = \alpha(S, T, p) - \alpha(35, 0, p)$), representing the deviation of the measured specific volume from a standardized uniform ocean. The vertical integral of this specific volume anomaly between two pressure levels yields the <strong>geopotential anomaly</strong> ($\Delta \Phi$).</p>
+
+            <p>This produces the practical equations for the <strong>Dynamic Method</strong>:</p>
+            <div class="math-block">
+                $$v_1 - v_0 = \frac{1}{f} \frac{\partial \Delta \Phi}{\partial x} \quad \text{and} \quad u_1 - u_0 = -\frac{1}{f} \frac{\partial \Delta \Phi}{\partial y}$$
+            </div>
+
+            <p>By designating a deep pressure level as a <strong>level of no motion</strong> where initial velocity is assumed to be zero ($V_0 \approx 0$), this methodology allows oceanographers to compute absolute geostrophic currents solely from temperature and salinity profiles.</p>
+
+        </main>
+    </div>
+</body>
+</html>
