@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary: Wind-Driven Ocean Circulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { academic: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a' } },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                color: '#334155',
+                                h1: { color: '#0f172a', fontWeight: '700', fontFamily: '"Inter", sans-serif' },
+                                h2: { color: '#0f172a', fontWeight: '700', fontSize: '1.875em', borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', marginTop: '3rem', marginBottom: '1.5rem', fontFamily: '"Inter", sans-serif' },
+                                h3: { color: '#1e293b', fontWeight: '600', fontSize: '1.5em', marginTop: '2.5rem', marginBottom: '1rem', fontFamily: '"Inter", sans-serif' },
+                                p: { lineHeight: '1.8', marginTop: '1.25em', marginBottom: '1.25em' },
+                                a: { color: '#2563eb', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
+                                ul: { marginTop: '1em', marginBottom: '1em' },
+                                li: { marginTop: '0.5em', marginBottom: '0.5em' }
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #f8fafc; }
+        .technique-box { background-color: #fdf4ff; border-left: 4px solid #c026d3; padding: 1.25rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0; font-family: 'Inter', system-ui, sans-serif; }
+        .technique-title { font-weight: 700; color: #86198f; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em;}
+        .math-block { overflow-x: auto; margin: 2rem 0; padding: 1rem 0; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="max-w-4xl mx-auto px-10 py-16 bg-white shadow-sm my-10 rounded-xl border border-gray-200">
+        
+        <header class="mb-14">
+            <h1 class="text-4xl font-bold text-academic-900 mb-4 tracking-tight" style="font-family: 'Inter', sans-serif;">Summary: Wind-Driven Circulation</h1>
+            <p class="text-xl text-gray-600 font-light border-b pb-8" style="font-family: 'Inter', sans-serif;">A Synthesis of Ocean Dynamics, Scaling, and Physical Constraints</p>
+        </header>
+
+        <main class="prose prose-lg max-w-none">
+            <p>The goal of Geophysical Fluid Dynamics (GFD) is not simply to write down the full, highly complex Navier-Stokes equations, as they permit a zoo of chaotic solutions unhelpful for large-scale analysis. The primary methodology of oceanographic theory is to <em>constrain the phase space</em>. By identifying specific length scales, time scales, and conserved quantities, we systematically simplify the equations to isolate the dominant physics governing different domains of the ocean.</p>
+            
+            <p>This document synthesizes our exploration of the wind-driven ocean circulation, tracing momentum transfer from the surface mixed layer down into the deep geostrophic interior, and ultimately to the continental boundaries.</p>
+
+            <h2>1. The Mixed Layer: Dealing with Turbulence</h2>
+            
+            <p>The uppermost meters of the ocean are heavily influenced by direct atmospheric forcing. Wind injects kinetic energy, generating small-scale turbulence and eddies that rapidly mix physical properties, erasing vertical gradients.</p>
+            
+            <div class="technique-box">
+                <div class="technique-title">Mathematical Technique: Reynolds Averaging & Parameterization</div>
+                <p class="text-fuchsia-900 mb-0 text-base">To analyze turbulence mathematically, we utilize Reynolds Decomposition ($u = \bar{u} + u'$), separating the flow into a mean state and a fluctuating component. Substituting this into the non-linear momentum equations generates covariance terms (e.g., $\overline{u' w'}$) that affect the mean flow. Because these fluctuating terms cannot be closed directly (the <strong>closure problem</strong>), we apply a parameterization, modeling the turbulent momentum transfer as an <strong>Eddy Diffusivity</strong> ($K_z$). This abstracts complex, small-scale eddy interactions into a manageable diffusion framework applicable to large-scale modeling.</p>
+            </div>
+
+            <p><strong>Key Insight:</strong> The mixed layer acts to distribute surface atmospheric forcing uniformly across a shallow vertical layer. However, molecular viscosity is too weak to explain oceanic mixing; large-scale dynamics require the significantly larger eddy diffusivity to account for turbulent momentum transfer.</p>
+
+            <h2>2. Inertial Oscillations: Rotation at the Surface</h2>
+            
+            <p>When transient wind gusts impact the surface mixed layer, they impart momentum. As spatial scales increase and turbulent diffusion becomes less dominant, the Coriolis force exerts control over the fluid's trajectory.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Mathematical Technique: Scaling Analysis</div>
+                <p class="text-fuchsia-900 mb-0 text-base">We isolate this phenomenon by defining the temporal scale by the rotation of the Earth ($T \sim 1/f$). Under these constraints, the advective terms, pressure gradients, and diffusion terms drop out of the momentum equations. We are left with a linearized system where local acceleration perfectly balances the Coriolis force ($\frac{\partial u}{\partial t} = fv$, $\frac{\partial v}{\partial t} = -fu$).</p>
+            </div>
+
+            <p><strong>Key Insight:</strong> The solution to these linearized equations is simple harmonic motion, resulting in circular trajectories known as inertial oscillations. Crucially, these surface oscillations generate near-inertial waves that propagate energy downward, providing a non-local mechanism to force mixing deep within the thermocline, ultimately assisting the return flow of the deep thermohaline circulation.</p>
+
+            <h2>3. The Ekman Layer: Bulk Mass Transport</h2>
+            
+            <p>As we extend the analysis to depths of tens of meters, the dynamic balance shifts to a steady state where the rotational time scale dominates ($Ro \ll 1$), and the Ekman number is on the order of $1$. The governing balance is between the Coriolis force and the vertical shear of turbulent wind stress.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Mathematical Technique: Vertical Integration</div>
+                <p class="text-fuchsia-900 mb-0 text-base">Attempting to solve the exact vertical velocity profile requires assuming a constant eddy viscosity, leading to the theoretical Ekman Spiral. However, by vertically integrating the momentum equations over the entire depth of the layer, the internal turbulent complexities vanish. The total integrated mass transport ($M_x, M_y$) is revealed to be governed strictly by the surface boundary condition (the observable wind stress at 10 meters).</p>
+            </div>
+
+            <p><strong>Key Insight:</strong> Ekman transport is directed $90^\circ$ perpendicular to the prevailing wind. More significantly, spatial variations in the wind field create divergences in the Ekman transport. To satisfy mass continuity, this horizontal divergence drives vertical velocities at the base of the Ekman layer, a process known as <strong>Ekman Pumping and Suction</strong>. This provides the direct local pathway for the wind to dynamically impact the deep ocean.</p>
+
+            <h2>4. Sverdrup Balance: The Geostrophic Interior</h2>
+            
+            <p>Beneath the Ekman layer lies the deep interior ocean. Here, turbulent friction is negligible ($Ek \ll 1$), and the steady-state flow is in Geostrophic Balance (Coriolis force balanced by pressure gradients). Ekman pumping forces water downward, vertically compressing the deep geostrophic water columns. Mass continuity requires these columns to horizontally diverge.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Mathematical Technique: Conservation of Potential Vorticity</div>
+                <p class="text-fuchsia-900 mb-0 text-base">Geostrophic divergence is impossible on a flat $f$-plane. To resolve this, we leverage the conservation of Barotropic Potential Vorticity ($\frac{\zeta + f}{H} = \text{const}$). Utilizing the planetary vorticity equation, we mathematically establish that steady horizontal divergence is only sustainable if the fluid parcel advects across latitudes (the $\beta$-effect). This formally links vertical Ekman pumping to meridional geostrophic velocities.</p>
+            </div>
+
+            <p><strong>Key Insight:</strong> Sverdrup flow proves that wind-stress curl dictates the total, vertically integrated meridional transport of the ocean. The requirement to conserve mass and vorticity on a spherical Earth forces the broad interior of the subtropical gyres to flow slowly equatorward.</p>
+
+            <h2>5. Western Boundary Currents: Closing the Budget</h2>
+            
+            <p>Sverdrup theory dictates a massive, basin-wide equatorward flow. To satisfy mass conservation in a bounded basin, a northward return flow must exist. Determining its structure requires analyzing the basin-wide vorticity budget. The wind stress continually adds negative vorticity to the basin, and the required poleward return flow demands further negative relative vorticity to conserve PV.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Mathematical Technique: Analyzing Differential Symmetry</div>
+                <p class="text-fuchsia-900 mb-0 text-base">Henry Stommel's formulation integrates the wind curl, the $\beta$-effect, and lateral friction into a single differential equation. Analyzing the spatial symmetry of this equation reveals that the $\beta$-effect introduces an odd-order derivative ($\frac{\partial \psi}{\partial x}$). This mathematically breaks the east-west symmetry of the Poisson operator. Solving for boundary layer configurations yields stable, decaying exponential solutions only on the western boundary.</p>
+            </div>
+
+            <p><strong>Key Insight:</strong> A steady state is only achievable if the ocean dissipates accumulated vorticity. Lateral friction is the only viable sink. Because an eastern boundary current injects negative vorticity (exacerbating the imbalance), physical constraints demand the return flow occurs on the western boundary, where the lateral shear injects positive vorticity. To match the basin-wide wind forcing within a narrow frictional strip, this western boundary current must be intense, narrow, and rapid, explaining the existence of phenomena like the Gulf Stream.</p>
+
+        </main>
+    </div>
+</body>
+</html>
